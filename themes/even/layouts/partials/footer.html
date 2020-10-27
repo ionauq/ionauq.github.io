@@ -14,12 +14,11 @@
 
 <div class="copyright">
   <span class="power-by">
-    {{ (printf (T "powered") `<a class="hexo-link" href="https://gohugo.io">Hugo</a>`) | safeHTML }}
+    {{ (printf (T "powered")) | safeHTML }}
   </span>
   <span class="division">|</span>
   <span class="theme-info">
-    {{ T "theme" }} - 
-    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+    {{ T "theme" }}
   </span>
 
   {{ if .Site.Params.busuanzi.enable -}}
