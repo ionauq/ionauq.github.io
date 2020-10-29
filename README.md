@@ -4,5 +4,5 @@ hugo server  --buildDrafts
 ```
 
 ```
-hugo --baseUrl="http://vovoyager.github.io/"
+hugo --baseUrl="https://vovoyager.github.io/"
 ```
