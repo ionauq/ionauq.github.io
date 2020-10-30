@@ -1,7 +1,7 @@
 ---
 title: "Multiples of 3 and 5"
 date: 2020-10-28T17:40:00+08:00
-draft: true
+draft: false
 tags: ["欧拉计划", "数学"]
 categories: ["欧拉计划"]
 ---
