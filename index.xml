@@ -7,7 +7,16 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <copyright>白水</copyright>
-    <lastBuildDate>Wed, 28 Oct 2020 17:40:00 +0800</lastBuildDate><atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 18 Nov 2020 10:31:46 +0800</lastBuildDate><atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>在线工具类网站</title>
+      <link>http://localhost:1313/post/tools/</link>
+      <pubDate>Wed, 18 Nov 2020 10:31:46 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/tools/</guid>
+      <description>工具类网站 图片压缩 tinify.cn 使用智能有损压缩技术将您的PNG文件的文件大小降低,对视觉的影响几乎不可见。好用，靠谱。 语言学习 国学大师 国学学习百宝箱。</description>
+    </item>
+    
     <item>
       <title>Multiples of 3 and 5</title>
       <link>http://localhost:1313/post/projecteuler/problem_1/</link>
@@ -15,6 +24,15 @@
       
       <guid>http://localhost:1313/post/projecteuler/problem_1/</guid>
       <description>Multiples of 3 and 5 If we list all the natural numbers below 10 that are multiples of 3 or 5, we get 3, 5, 6 and 9. The sum of these multiples is 23. Find the sum of all the multiples of 3 or 5 below 1000. 3或5的倍数 在小于10的自然数中，3或5的倍</description>
+    </item>
+    
+    <item>
+      <title>压测工具</title>
+      <link>http://localhost:1313/post/benchmark/</link>
+      <pubDate>Wed, 28 Oct 2020 09:00:00 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/benchmark/</guid>
+      <description>命令行下常用的压测工具有ab和wrk。 ab 1 yum install httpd-tools wrk wrk 是一款 C 语言开发的压测工具，并且支持使用LuaJIT定制化请求。 1 wrk -t12 -c400 -d30s http://127.0.0.1:8080/index.html 1 2 3 4 5 6</description>
     </item>
     
   </channel>
