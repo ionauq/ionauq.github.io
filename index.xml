@@ -7,7 +7,25 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <copyright>白水</copyright>
-    <lastBuildDate>Wed, 18 Nov 2020 10:31:46 +0800</lastBuildDate><atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 24 Feb 2021 18:10:06 +0800</lastBuildDate><atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>爱生气的书店老板</title>
+      <link>http://localhost:1313/post/leetcode/grumpy_bookstore_owner/</link>
+      <pubDate>Wed, 24 Feb 2021 18:10:06 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/leetcode/grumpy_bookstore_owner/</guid>
+      <description>今天，书店老板有一家店打算试营业 customers.length 分钟。每分钟都有一些顾客（customers[i]）会进入书店，所有这些顾客都会在那一分钟结束后离开。 在某</description>
+    </item>
+    
+    <item>
+      <title>Rust奇奇怪怪的语法</title>
+      <link>http://localhost:1313/post/rust/grammar/</link>
+      <pubDate>Thu, 28 Jan 2021 19:26:32 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/rust/grammar/</guid>
+      <description>Rust 语法奇奇怪怪的写法。 ? 操作符 函数调用后带 ? 什么含义 1 File::create(filename)?; 等同于 1 2 3 4 let output = match File::create(filename){ Ok(f) =&amp;gt; { f } Err(e) =&amp;gt; { return Err(e); } }; ?操作符用于简化Result结构的写</description>
+    </item>
+    
     <item>
       <title>在线工具类网站</title>
       <link>http://localhost:1313/post/tools/</link>

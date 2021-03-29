@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>leetcode on 白水</title>
+    <link>http://localhost:1313/categories/leetcode/</link>
+    <description>Recent content in leetcode on 白水</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <copyright>白水</copyright>
+    <lastBuildDate>Wed, 24 Feb 2021 18:10:06 +0800</lastBuildDate><atom:link href="http://localhost:1313/categories/leetcode/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>爱生气的书店老板</title>
+      <link>http://localhost:1313/post/leetcode/grumpy_bookstore_owner/</link>
+      <pubDate>Wed, 24 Feb 2021 18:10:06 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/leetcode/grumpy_bookstore_owner/</guid>
+      <description>今天，书店老板有一家店打算试营业 customers.length 分钟。每分钟都有一些顾客（customers[i]）会进入书店，所有这些顾客都会在那一分钟结束后离开。 在某</description>
+    </item>
+    
+  </channel>
+</rss>

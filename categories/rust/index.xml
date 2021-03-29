@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Rust on 白水</title>
+    <link>http://localhost:1313/categories/rust/</link>
+    <description>Recent content in Rust on 白水</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <copyright>白水</copyright>
+    <lastBuildDate>Thu, 28 Jan 2021 19:26:32 +0800</lastBuildDate><atom:link href="http://localhost:1313/categories/rust/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Rust奇奇怪怪的语法</title>
+      <link>http://localhost:1313/post/rust/grammar/</link>
+      <pubDate>Thu, 28 Jan 2021 19:26:32 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/rust/grammar/</guid>
+      <description>Rust 语法奇奇怪怪的写法。 ? 操作符 函数调用后带 ? 什么含义 1 File::create(filename)?; 等同于 1 2 3 4 let output = match File::create(filename){ Ok(f) =&amp;gt; { f } Err(e) =&amp;gt; { return Err(e); } }; ?操作符用于简化Result结构的写</description>
+    </item>
+    
+  </channel>
+</rss>
