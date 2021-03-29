@@ -3,7 +3,7 @@ title: "Rust奇奇怪怪的语法"
 date: 2021-01-28T19:26:32+08:00
 tags: ["Rust"]
 categories: ["Rust"]
-draft: true
+draft: false
 ---
 
 Rust 语法奇奇怪怪的写法。

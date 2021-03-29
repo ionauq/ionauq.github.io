@@ -2,7 +2,6 @@
 title: "爱生气的书店老板"
 date: 2021-02-24T18:10:06+08:00
 categories: ["leetcode"]
-draft: true
 ---
 
 今天，书店老板有一家店打算试营业 customers.length 分钟。每分钟都有一些顾客（customers[i]）会进入书店，所有这些顾客都会在那一分钟结束后离开。
@@ -41,6 +40,7 @@ draft: true
 pub struct Solution {}
 
 impl Solution {
+
     pub fn max_satisfied(customers: Vec<i32>, grumpy: Vec<i32>, x: i32) -> i32 {
         let x = x as usize;
         let mut base: i32 = 0;
@@ -84,6 +84,35 @@ mod tests {
                 3,
             )
         );
+    }
+}
+```
+
+### Java
+
+```java
+public class Solution {
+    
+    public int maxSatisfied(int[] customers, int[] grumpy, int x) {
+        int base = 0;
+        for (int i = 0; i < customers.length; i++) {
+            if (grumpy[i] == 0) {
+                base += customers[i];
+            }
+        }
+
+        int increase = 0;
+        for (int i = 0; i < x; i++) {
+            increase += customers[i] * grumpy[i];
+        }
+
+        int maxIncrease = increase;
+        for (int i = x; i < customers.length; i++) {
+            increase = increase + customers[i] * grumpy[i] - customers[i - x] * grumpy[i - x];
+            maxIncrease = Math.max(maxIncrease, increase);
+        }
+
+        return base + maxIncrease;
     }
 }
 ```
