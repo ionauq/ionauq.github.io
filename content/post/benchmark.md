@@ -46,4 +46,28 @@ wrk -t12 -c400 -d30s http://127.0.0.1:8080/index.html
 
 ### lua 函数
 
+wrk支持在启动阶段、运行阶段和结束阶段三个阶段对请求进行定制化处理。
+
+##### 启动阶段
+```
+function setup(thread)
+```
+##### 运行阶段
+```
+function init(args)
+
+function delay()
+
+function request()
+
+function response(status, headers, body)
+
+```
+
+##### 结束阶段
+
+```
+function done(summary, latency, requests)
+```
+
 
