@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.78.2 with theme even" />
+<meta name="generator" content="Hugo 0.82.0 with theme even" />
 
 
 <link rel="canonical" href="http://localhost:1313/post/benchmark/" />
@@ -35,26 +35,22 @@
 
 
 
-<link href="/sass/main.min.0cc59d97ea38a4df6582140b13eba506be94f5873e0cf6f16e8a9ed0fa4840a1.css" rel="stylesheet">
+<link href="/sass/main.min.4424d8f647dff84532db0c3348204a2235d6223aec5cad2293099d84b2e2ae3f.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
 
 
 <meta property="og:title" content="压测工具" />
 <meta property="og:description" content="命令行下常用的压测工具有ab和wrk。 ab 1 yum install httpd-tools wrk wrk 是一款 C 语言开发的压测工具，并且支持使用LuaJIT定制化请求。 1 wrk -t12 -c400 -d30s http://127.0.0.1:8080/index.html 1 2 3 4 5 6" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="http://localhost:1313/post/benchmark/" />
-<meta property="article:published_time" content="2020-10-28T09:00:00+08:00" />
-<meta property="article:modified_time" content="2020-10-28T09:00:00+08:00" />
+<meta property="og:url" content="http://localhost:1313/post/benchmark/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2020-10-28T09:00:00&#43;08:00" />
+<meta property="article:modified_time" content="2020-10-28T09:00:00&#43;08:00" />
+
 <meta itemprop="name" content="压测工具">
-<meta itemprop="description" content="命令行下常用的压测工具有ab和wrk。 ab 1 yum install httpd-tools wrk wrk 是一款 C 语言开发的压测工具，并且支持使用LuaJIT定制化请求。 1 wrk -t12 -c400 -d30s http://127.0.0.1:8080/index.html 1 2 3 4 5 6">
-<meta itemprop="datePublished" content="2020-10-28T09:00:00+08:00" />
-<meta itemprop="dateModified" content="2020-10-28T09:00:00+08:00" />
-<meta itemprop="wordCount" content="291">
-
-
-
-<meta itemprop="keywords" content="压测工具," />
-<meta name="twitter:card" content="summary"/>
+<meta itemprop="description" content="命令行下常用的压测工具有ab和wrk。 ab 1 yum install httpd-tools wrk wrk 是一款 C 语言开发的压测工具，并且支持使用LuaJIT定制化请求。 1 wrk -t12 -c400 -d30s http://127.0.0.1:8080/index.html 1 2 3 4 5 6"><meta itemprop="datePublished" content="2020-10-28T09:00:00&#43;08:00" />
+<meta itemprop="dateModified" content="2020-10-28T09:00:00&#43;08:00" />
+<meta itemprop="wordCount" content="364">
+<meta itemprop="keywords" content="压测工具," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="压测工具"/>
 <meta name="twitter:description" content="命令行下常用的压测工具有ab和wrk。 ab 1 yum install httpd-tools wrk wrk 是一款 C 语言开发的压测工具，并且支持使用LuaJIT定制化请求。 1 wrk -t12 -c400 -d30s http://127.0.0.1:8080/index.html 1 2 3 4 5 6"/>
 
@@ -89,6 +85,8 @@
         <li class="mobile-menu-item">标签</li>
       </a><a href="/categories/">
         <li class="mobile-menu-item">分类</li>
+      </a><a href="/about">
+        <li class="mobile-menu-item">关于</li>
       </a>
   </ul>
 </nav>
@@ -108,6 +106,8 @@
         <a class="menu-item-link" href="/tags/">标签</a>
       </li><li class="menu-item">
         <a class="menu-item-link" href="/categories/">分类</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about">关于</a>
       </li>
   </ul>
 </nav>
@@ -126,7 +126,7 @@
         <div class="post-category">
             <a href="/categories/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/"> 工具使用 </a>
             </div>
-          <span class="more-meta"> 约 291 字 </span>
+          <span class="more-meta"> 约 364 字 </span>
           <span class="more-meta"> 预计阅读 1 分钟 </span>
         
       </div>
@@ -207,7 +207,49 @@
 </code></pre></td></tr></table>
 </div>
 </div><h3 id="lua-函数">lua 函数</h3>
+<p>wrk支持在启动阶段、运行阶段和结束阶段三个阶段对请求进行定制化处理。</p>
+<h5 id="启动阶段">启动阶段</h5>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">function setup(thread)
+</code></pre></td></tr></table>
+</div>
+</div><h5 id="运行阶段">运行阶段</h5>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">function init(args)
 
+function delay()
+
+function request()
+
+function response(status, headers, body)
+
+</code></pre></td></tr></table>
+</div>
+</div><h5 id="结束阶段">结束阶段</h5>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">function done(summary, latency, requests)
+</code></pre></td></tr></table>
+</div>
+</div>
     </div>
 
     
@@ -254,7 +296,8 @@
 
   <span class="copyright-year">
     &copy; 
-    2020<span class="heart"><i class="iconfont icon-heart"></i></span><span>白水</span>
+    2020 - 
+    2021<span class="heart"><i class="iconfont icon-heart"></i></span><span>白水</span>
   </span>
 </div>
 
@@ -271,7 +314,7 @@
 
 
 
-<script type="text/javascript" src="/js/main.min.c12618f9a600c40bd024996677e951e64d3487006775aeb22e200c990006c5c7.js"></script>
+<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
   <script type="text/javascript">
     window.MathJax = {
       tex: {
