@@ -70,4 +70,61 @@ function response(status, headers, body)
 function done(summary, latency, requests)
 ```
 
+### 使用方式示例
 
+指定线程数、TCP连接数、压测时间并使用lua脚本
+
+```
+wrk -t50 -c500 -d30s --latency  -s load.lua http://localhost/filter
+```
+
+load.lua
+
+```
+wrk.method = "POST"
+wrk.headers["Content-Type"] = "application/json"
+
+
+key_length = 16
+
+local function get_random_key(n) 
+    local t = {
+        "0","1","2","3","4","5","6","7","8","9",
+        "a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z",
+        "A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z",
+    }    
+    local s = ""
+    for i =1, n do
+        s = s .. t[math.random(#t)]        
+    end;
+    return s
+end;
+
+local function create_keys()
+    local keys = {}
+    for i=1, 100 do
+      keys[i] = get_random_key(key_length)
+    end;
+    return keys
+end;
+
+local function get_body()
+    keys= create_keys()
+    body = {
+        filter="bloom",
+        keyspace="default",
+        action=2,
+        keys = keys,
+    }
+
+    local cjson = require "cjson"
+    str_body = cjson.encode(body)
+    return str_body
+end;
+
+
+function request()
+    wrk.body = get_body()
+    return wrk.format()
+end;
+```
