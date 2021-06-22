@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.82.0 with theme even" />
+<meta name="generator" content="Hugo 0.84.0 with theme even" />
 
 
 <link rel="canonical" href="http://localhost:1313/post/benchmark/" />
@@ -35,7 +35,7 @@
 
 
 
-<link href="/sass/main.min.4424d8f647dff84532db0c3348204a2235d6223aec5cad2293099d84b2e2ae3f.css" rel="stylesheet">
+<link href="/sass/main.min.5f113595c968d56879a9b09384d5cb910c30a79bf396b26825b626ffd3b8fad9.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
 
 
@@ -49,7 +49,7 @@
 <meta itemprop="name" content="压测工具">
 <meta itemprop="description" content="命令行下常用的压测工具有ab和wrk。 ab 1 yum install httpd-tools wrk wrk 是一款 C 语言开发的压测工具，并且支持使用LuaJIT定制化请求。 1 wrk -t12 -c400 -d30s http://127.0.0.1:8080/index.html 1 2 3 4 5 6"><meta itemprop="datePublished" content="2020-10-28T09:00:00&#43;08:00" />
 <meta itemprop="dateModified" content="2020-10-28T09:00:00&#43;08:00" />
-<meta itemprop="wordCount" content="364">
+<meta itemprop="wordCount" content="541">
 <meta itemprop="keywords" content="压测工具," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="压测工具"/>
 <meta name="twitter:description" content="命令行下常用的压测工具有ab和wrk。 ab 1 yum install httpd-tools wrk wrk 是一款 C 语言开发的压测工具，并且支持使用LuaJIT定制化请求。 1 wrk -t12 -c400 -d30s http://127.0.0.1:8080/index.html 1 2 3 4 5 6"/>
@@ -89,12 +89,21 @@
         <li class="mobile-menu-item">关于</li>
       </a>
   </ul>
+
+  
+
+
 </nav>
+
   <div class="container" id="mobile-panel">
     <header id="header" class="header">
         <div class="logo-wrapper">
   <a href="/" class="logo">白水</a>
 </div>
+
+
+
+
 
 <nav class="site-navbar">
   <ul id="menu" class="menu">
@@ -111,6 +120,7 @@
       </li>
   </ul>
 </nav>
+
     </header>
 
     <main id="main" class="main">
@@ -126,8 +136,8 @@
         <div class="post-category">
             <a href="/categories/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/"> 工具使用 </a>
             </div>
-          <span class="more-meta"> 约 364 字 </span>
-          <span class="more-meta"> 预计阅读 1 分钟 </span>
+          <span class="more-meta"> 约 541 字 </span>
+          <span class="more-meta"> 预计阅读 2 分钟 </span>
         
       </div>
     </header>
@@ -143,6 +153,7 @@
         <li>
           <ul>
             <li><a href="#lua-函数">lua 函数</a></li>
+            <li><a href="#使用方式示例">使用方式示例</a></li>
           </ul>
         </li>
       </ul>
@@ -249,6 +260,115 @@ function response(status, headers, body)
 <pre class="chroma"><code class="language-fallback" data-lang="fallback">function done(summary, latency, requests)
 </code></pre></td></tr></table>
 </div>
+</div><h3 id="使用方式示例">使用方式示例</h3>
+<p>指定线程数、TCP连接数、压测时间并使用lua脚本</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">wrk -t50 -c500 -d30s --latency  -s load.lua http://localhost/filter
+</code></pre></td></tr></table>
+</div>
+</div><p>load.lua</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">wrk.method = &#34;POST&#34;
+wrk.headers[&#34;Content-Type&#34;] = &#34;application/json&#34;
+
+
+key_length = 16
+
+local function get_random_key(n) 
+    local t = {
+        &#34;0&#34;,&#34;1&#34;,&#34;2&#34;,&#34;3&#34;,&#34;4&#34;,&#34;5&#34;,&#34;6&#34;,&#34;7&#34;,&#34;8&#34;,&#34;9&#34;,
+        &#34;a&#34;,&#34;b&#34;,&#34;c&#34;,&#34;d&#34;,&#34;e&#34;,&#34;f&#34;,&#34;g&#34;,&#34;h&#34;,&#34;i&#34;,&#34;j&#34;,&#34;k&#34;,&#34;l&#34;,&#34;m&#34;,&#34;n&#34;,&#34;o&#34;,&#34;p&#34;,&#34;q&#34;,&#34;r&#34;,&#34;s&#34;,&#34;t&#34;,&#34;u&#34;,&#34;v&#34;,&#34;w&#34;,&#34;x&#34;,&#34;y&#34;,&#34;z&#34;,
+        &#34;A&#34;,&#34;B&#34;,&#34;C&#34;,&#34;D&#34;,&#34;E&#34;,&#34;F&#34;,&#34;G&#34;,&#34;H&#34;,&#34;I&#34;,&#34;J&#34;,&#34;K&#34;,&#34;L&#34;,&#34;M&#34;,&#34;N&#34;,&#34;O&#34;,&#34;P&#34;,&#34;Q&#34;,&#34;R&#34;,&#34;S&#34;,&#34;T&#34;,&#34;U&#34;,&#34;V&#34;,&#34;W&#34;,&#34;X&#34;,&#34;Y&#34;,&#34;Z&#34;,
+    }    
+    local s = &#34;&#34;
+    for i =1, n do
+        s = s .. t[math.random(#t)]        
+    end;
+    return s
+end;
+
+local function create_keys()
+    local keys = {}
+    for i=1, 100 do
+      keys[i] = get_random_key(key_length)
+    end;
+    return keys
+end;
+
+local function get_body()
+    keys= create_keys()
+    body = {
+        filter=&#34;bloom&#34;,
+        keyspace=&#34;default&#34;,
+        action=2,
+        keys = keys,
+    }
+
+    local cjson = require &#34;cjson&#34;
+    str_body = cjson.encode(body)
+    return str_body
+end;
+
+
+function request()
+    wrk.body = get_body()
+    return wrk.format()
+end;
+</code></pre></td></tr></table>
+</div>
 </div>
     </div>
 
@@ -289,7 +409,7 @@ function response(status, headers, body)
   </span>
   <span class="division">|</span>
   <span class="theme-info">
-    地势坤，君子以厚德载物
+    地势坤，君子以厚德载物 
   </span>
 
   
@@ -318,6 +438,7 @@ function response(status, headers, body)
   <script type="text/javascript">
     window.MathJax = {
       tex: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
         }
     };
   </script>

@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.82.0 with theme even" />
+<meta name="generator" content="Hugo 0.84.0 with theme even" />
 
 
 <link rel="canonical" href="http://localhost:1313/post/rust/grammar/" />
@@ -35,7 +35,7 @@
 
 
 
-<link href="/sass/main.min.4424d8f647dff84532db0c3348204a2235d6223aec5cad2293099d84b2e2ae3f.css" rel="stylesheet">
+<link href="/sass/main.min.5f113595c968d56879a9b09384d5cb910c30a79bf396b26825b626ffd3b8fad9.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
 
 
@@ -49,7 +49,7 @@
 <meta itemprop="name" content="Rust奇奇怪怪的语法">
 <meta itemprop="description" content="Rust 语法奇奇怪怪的写法。 ? 操作符 函数调用后带 ? 什么含义 1 File::create(filename)?; 等同于 1 2 3 4 let output = match File::create(filename){ Ok(f) =&gt; { f } Err(e) =&gt; { return Err(e); } }; ?操作符用于简化Result结构的写"><meta itemprop="datePublished" content="2021-01-28T19:26:32&#43;08:00" />
 <meta itemprop="dateModified" content="2021-01-28T19:26:32&#43;08:00" />
-<meta itemprop="wordCount" content="423">
+<meta itemprop="wordCount" content="498">
 <meta itemprop="keywords" content="Rust," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Rust奇奇怪怪的语法"/>
 <meta name="twitter:description" content="Rust 语法奇奇怪怪的写法。 ? 操作符 函数调用后带 ? 什么含义 1 File::create(filename)?; 等同于 1 2 3 4 let output = match File::create(filename){ Ok(f) =&gt; { f } Err(e) =&gt; { return Err(e); } }; ?操作符用于简化Result结构的写"/>
@@ -89,12 +89,21 @@
         <li class="mobile-menu-item">关于</li>
       </a>
   </ul>
+
+  
+
+
 </nav>
+
   <div class="container" id="mobile-panel">
     <header id="header" class="header">
         <div class="logo-wrapper">
   <a href="/" class="logo">白水</a>
 </div>
+
+
+
+
 
 <nav class="site-navbar">
   <ul id="menu" class="menu">
@@ -111,6 +120,7 @@
       </li>
   </ul>
 </nav>
+
     </header>
 
     <main id="main" class="main">
@@ -126,7 +136,7 @@
         <div class="post-category">
             <a href="/categories/rust/"> Rust </a>
             </div>
-          <span class="more-meta"> 约 423 字 </span>
+          <span class="more-meta"> 约 498 字 </span>
           <span class="more-meta"> 预计阅读 1 分钟 </span>
         
       </div>
@@ -259,18 +269,18 @@ match numbers {
 </span><span class="lnt">11
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">let s = Some(String::from(&#34;Hello!&#34;));
-
-// s 的值仍然会移动进 _s，并阻止我们再次使用 s
-// if let Some(_s) = s {
-// 只使用下`_`本身，并不会绑定值,s 没有被移动进`_`
-
-if let Some(_) = s {
-    println!(&#34;found a string&#34;);
-}
-
-println!(&#34;{:?}&#34;, s);
-</code></pre></td></tr></table>
+<pre class="chroma"><code class="language-mysql" data-lang="mysql"><span class="n">let</span><span class="w"> </span><span class="n">s</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">Some</span><span class="p">(</span><span class="n">String</span><span class="p">::</span><span class="k">from</span><span class="p">(</span><span class="s2">&#34;Hello!&#34;</span><span class="p">));</span><span class="w">
+</span><span class="w">
+</span><span class="w"></span><span class="o">//</span><span class="w"> </span><span class="n">s</span><span class="w"> </span><span class="err">的值仍然会移动进</span><span class="w"> </span><span class="n">_s</span><span class="err">，并阻止我们再次使用</span><span class="w"> </span><span class="n">s</span><span class="w">
+</span><span class="w"></span><span class="o">//</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">let</span><span class="w"> </span><span class="nf">Some</span><span class="p">(</span><span class="n">_s</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">s</span><span class="w"> </span><span class="err">{</span><span class="w">
+</span><span class="w"></span><span class="o">//</span><span class="w"> </span><span class="err">只使用下</span><span class="o">`</span><span class="n">_</span><span class="o">`</span><span class="err">本身，并不会绑定值</span><span class="p">,</span><span class="n">s</span><span class="w"> </span><span class="err">没有被移动进</span><span class="o">`</span><span class="n">_</span><span class="o">`</span><span class="w">
+</span><span class="w">
+</span><span class="w"></span><span class="k">if</span><span class="w"> </span><span class="n">let</span><span class="w"> </span><span class="nf">Some</span><span class="p">(</span><span class="n">_</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">s</span><span class="w"> </span><span class="err">{</span><span class="w">
+</span><span class="w">    </span><span class="n">println</span><span class="o">!</span><span class="p">(</span><span class="s2">&#34;found a string&#34;</span><span class="p">);</span><span class="w">
+</span><span class="w"></span><span class="err">}</span><span class="w">
+</span><span class="w">
+</span><span class="w"></span><span class="n">println</span><span class="o">!</span><span class="p">(</span><span class="s2">&#34;{:?}&#34;</span><span class="p">,</span><span class="w"> </span><span class="n">s</span><span class="p">);</span><span class="w">
+</span></code></pre></td></tr></table>
 </div>
 </div>
     </div>
@@ -316,7 +326,7 @@ println!(&#34;{:?}&#34;, s);
   </span>
   <span class="division">|</span>
   <span class="theme-info">
-    地势坤，君子以厚德载物
+    地势坤，君子以厚德载物 
   </span>
 
   
@@ -345,6 +355,7 @@ println!(&#34;{:?}&#34;, s);
   <script type="text/javascript">
     window.MathJax = {
       tex: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
         }
     };
   </script>
