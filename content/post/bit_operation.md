@@ -8,6 +8,9 @@ draft: true
 
 
 https://www.cnblogs.com/inmoonlight/p/9301733.html
+
 http://ponder.work/2020/08/01/variable-precision-SWAR-algorithm/
+
 https://zhuanlan.zhihu.com/p/37014715
+
 http://graphics.stanford.edu/~seander/bithacks.html#OperationCounting
