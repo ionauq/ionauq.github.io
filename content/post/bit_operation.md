@@ -13,4 +13,7 @@ http://ponder.work/2020/08/01/variable-precision-SWAR-algorithm/
 
 https://zhuanlan.zhihu.com/p/37014715
 
-http://graphics.stanford.edu/~seander/bithacks.html#OperationCounting
+
+## 参考
+
+[Bit Twiddling Hacks](http://graphics.stanford.edu/~seander/bithacks.html)
