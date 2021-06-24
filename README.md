@@ -13,6 +13,7 @@ hugo server --buildDrafts
 hugo --baseUrl="https://qtume.github.io/"
 ```
 
+新建文章
 ```
 hugo new post fileName
 ```
