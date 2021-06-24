@@ -1,7 +1,7 @@
 
 ## 博客网站
 
-[https://vovoyager.github.io/](https://vovoyager.github.io/)
+[https://qtume.github.io/](https://qtume.github.io/)
 ## 常用命令
 
 本地预览
@@ -10,7 +10,7 @@ hugo server --buildDrafts
 ```
 
 ```
-hugo --baseUrl="https://vovoyager.github.io/"
+hugo --baseUrl="https://qtume.github.io/"
 ```
 
 ```
