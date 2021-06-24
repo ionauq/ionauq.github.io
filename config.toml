@@ -143,7 +143,7 @@ copyright = "白水"            # default: author.name ↓        # 默认为下
 
   [params.utterances]       # https://utteranc.es/
     owner = "4327765"                  # Your GitHub ID
-    repo = "qtume/qtume.github.io"   # The repo to store comments
+    repo = "qtume/qtume.github.io"     # The repo to store comments
 
   [params.gitalk]           # Gitalk is a comment system based on GitHub issues. see https://github.com/gitalk/gitalk
     owner = ""              # Your GitHub ID
