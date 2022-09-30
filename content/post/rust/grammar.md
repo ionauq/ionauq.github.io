@@ -8,7 +8,7 @@ draft: false
 
 Rust 语法奇奇怪怪的写法。
 
-`?` 操作符
+`?` 操作符 （Error propagation）
 ======
 
 函数调用后带 `?` 什么含义
@@ -25,7 +25,7 @@ let output = match File::create(filename){
 };
 ```
 
-`?`操作符用于简化Result结构的写法,用来简化判断`Ok`和`Err`。
+`?`操作符用于简化Result结构的写法，简化判断`Ok`和`Err`。
 
 `||` 闭包结构
 ======
@@ -90,3 +90,44 @@ if let Some(_) = s {
 println!("{:?}", s);
 ```
 
+`r#` 操作符
+======
+
+原始标识符（Raw identifiers）前缀 `r#`。
+
+原始标识符允许我们使用任何的单词作为标识符。
+
+Rust不允许使用Rust定义的关键字以及保留字（例：use、as、type、where、match等）作为标识符。
+
+```rust
+fn match(needle: &str, haystack: &str) -> bool {
+    haystack.contains(needle)
+}
+```
+会得到如下错误:
+```
+error: expected identifier, found keyword `match`
+ --> src/main.rs:4:4
+  |
+4 | fn match(needle: &str, haystack: &str) -> bool {
+  |    ^^^^^ expected identifier, found keyword
+```
+
+正确写法
+
+```rust
+fn r#match(needle: &str, haystack: &str) -> bool {
+    haystack.contains(needle)
+}
+
+fn main() {
+    assert!(r#match("foo", "foobar"));
+}
+```
+
+
+
+
+# 参考资料
+
+[Rust 程序设计语言](http://120.78.128.153/rustbook/appendix-02-operators.html)

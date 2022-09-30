@@ -1,8 +1,8 @@
 ---
 title: "你必须知道的排重策略"
 date: 2021-06-08T18:59:58+08:00
-tags: ["拍重", "Bloom filter", "BitMap"]
-categories: ["拍重"]
+tags: ["排重", "Bloom filter", "BitMap"]
+categories: ["排重"]
 ---
 
 ## 精准去重

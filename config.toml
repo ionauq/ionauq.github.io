@@ -18,7 +18,7 @@ hasCJKLanguage = true     # has chinese/japanese/korean ? # 自动检测是否�
 paginate = 10                                              # 首页每页显示的文章数
 disqusShortname = ""      # disqus_shortname
 googleAnalytics = ""      # UA-XXXXXXXX-X
-copyright = "白水"            # default: author.name ↓        # 默认为下面配置的author.name ↓
+copyright = '<a href="https://beian.miit.gov.cn/" target="_blank">鲁ICP备2021027677号-1</a>'   # default: author.name ↓        # 默认为下面配置的author.name ↓
 
 [author]                  # essential                     # 必需
   name = "白水"
@@ -131,9 +131,9 @@ copyright = "白水"            # default: author.name ↓        # 默认为下
   # Display a message at the beginning of an article to warn the readers that it's content may be outdated.
   # 在文章开头显示提示信息，提醒读者文章内容可能过时。
   [params.outdatedInfoWarning]
-    enable = false
-    hint = 30               # Display hint if the last modified time is more than these days ago.    # 如果文章最后更新于这天数之前，显示提醒
-    warn = 180              # Display warning if the last modified time is more than these days ago.    # 如果文章最后更新于这天数之前，显示警告
+    enable = true
+    hint = 180               # Display hint if the last modified time is more than these days ago.    # 如果文章最后更新于这天数之前，显示提醒
+    warn = 365              # Display warning if the last modified time is more than these days ago.    # 如果文章最后更新于这天数之前，显示警告
 
   [params.gitment]          # Gitment is a comment system based on GitHub issues. see https://github.com/imsun/gitment
     owner = ""              # Your GitHub ID

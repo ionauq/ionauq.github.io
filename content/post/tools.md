@@ -59,3 +59,6 @@ categories: ["网站分享"]
 
     > 国内PPT分享服务的平台,里面包含很多大会、技术等的ppt
     
+### 其他
+
+* [Vim](https://vim.rtorr.com/lang/zh_cn)
