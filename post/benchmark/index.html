@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.85.0 with theme even" />
+<meta name="generator" content="Hugo 0.104.2 with theme even" />
 
 
 <link rel="canonical" href="http://localhost:1313/post/benchmark/" />
@@ -49,7 +49,7 @@
 <meta itemprop="name" content="压测工具">
 <meta itemprop="description" content="命令行下常用的压测工具有ab和wrk。 ab 1 yum install httpd-tools wrk wrk 是一款 C 语言开发的压测工具，并且支持使用LuaJIT定制化请求。 1 wrk -t12 -c400 -d30s http://127.0.0.1:8080/index.html 1 2 3 4 5 6"><meta itemprop="datePublished" content="2020-10-28T09:00:00+08:00" />
 <meta itemprop="dateModified" content="2020-10-28T09:00:00+08:00" />
-<meta itemprop="wordCount" content="541">
+<meta itemprop="wordCount" content="540">
 <meta itemprop="keywords" content="压测工具," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="压测工具"/>
 <meta name="twitter:description" content="命令行下常用的压测工具有ab和wrk。 ab 1 yum install httpd-tools wrk wrk 是一款 C 语言开发的压测工具，并且支持使用LuaJIT定制化请求。 1 wrk -t12 -c400 -d30s http://127.0.0.1:8080/index.html 1 2 3 4 5 6"/>
@@ -136,7 +136,7 @@
         <div class="post-category">
             <a href="/categories/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/"> 工具使用 </a>
             </div>
-          <span class="more-meta"> 约 541 字 </span>
+          <span class="more-meta"> 约 540 字 </span>
           <span class="more-meta"> 预计阅读 2 分钟 </span>
         
       </div>
@@ -162,30 +162,35 @@
 </nav>
   </div>
 </div>
+  <div class="post-outdated">
+    <div class="warn">
+      <p>【注意】最后更新于 <span class="timeago" datetime="2020-10-28T09:00:00" title="October 28, 2020">October 28, 2020</span>，文中内容可能已过时，请谨慎使用。</p>
+    </div>
+  </div>
     <div class="post-content">
       <p>命令行下常用的压测工具有<code>ab</code>和<code>wrk</code>。</p>
 <h1 id="ab">ab</h1>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-Shell" data-lang="Shell">yum install httpd-tools
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-Shell" data-lang="Shell"><span class="line"><span class="cl">yum install httpd-tools
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h1 id="wrk">wrk</h1>
 <p><a href="https://github.com/wg/wrk">wrk</a> 是一款 C 语言开发的压测工具，并且支持使用LuaJIT定制化请求。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-Shell" data-lang="Shell">wrk -t12 -c400 -d30s http://127.0.0.1:8080/index.html
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-Shell" data-lang="Shell"><span class="line"><span class="cl">wrk -t12 -c400 -d30s http://127.0.0.1:8080/index.html
+</span></span></code></pre></td></tr></table>
 </div>
 </div><div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -201,79 +206,77 @@
 </span><span class="lnt">14
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">使用方法: wrk &lt;选项&gt; &lt;HTTP URL&gt;                            
-  Options:                                            
-    -c, --connections &lt;N&gt;  跟服务器建立并保持的TCP连接数量  (Connections to keep open)  
-    -d, --duration    &lt;T&gt;  压测时间                      (Duration of test)        
-    -t, --threads     &lt;N&gt;  使用多少个线程进行压测           (Number of threads to use)
-                                                    
-    -s, --script      &lt;S&gt;  指定Lua脚本路径                 (Load Lua script file)      
-    -H, --header      &lt;H&gt;  为每一个HTTP请求添加HTTP头       (Add header to request)         
-        --latency          在压测结束后，打印延迟统计信息     (Print latency statistics)
-        --timeout     &lt;T&gt;  Socket/请求超时时间             (Socket/request timeout)       
-    -v, --version          wrk版本信息                    (Print version details)
-                                                      
-  &lt;N&gt;代表数字参数，支持国际单位 (1k, 1M, 1G)
-  &lt;T&gt;代表时间参数，支持时间单位 (2s, 2m, 2h)
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">使用方法: wrk &lt;选项&gt; &lt;HTTP URL&gt;                            
+</span></span><span class="line"><span class="cl">  Options:                                            
+</span></span><span class="line"><span class="cl">    -c, --connections &lt;N&gt;  跟服务器建立并保持的TCP连接数量  (Connections to keep open)  
+</span></span><span class="line"><span class="cl">    -d, --duration    &lt;T&gt;  压测时间                      (Duration of test)        
+</span></span><span class="line"><span class="cl">    -t, --threads     &lt;N&gt;  使用多少个线程进行压测           (Number of threads to use)
+</span></span><span class="line"><span class="cl">                                                    
+</span></span><span class="line"><span class="cl">    -s, --script      &lt;S&gt;  指定Lua脚本路径                 (Load Lua script file)      
+</span></span><span class="line"><span class="cl">    -H, --header      &lt;H&gt;  为每一个HTTP请求添加HTTP头       (Add header to request)         
+</span></span><span class="line"><span class="cl">        --latency          在压测结束后，打印延迟统计信息     (Print latency statistics)
+</span></span><span class="line"><span class="cl">        --timeout     &lt;T&gt;  Socket/请求超时时间             (Socket/request timeout)       
+</span></span><span class="line"><span class="cl">    -v, --version          wrk版本信息                    (Print version details)
+</span></span><span class="line"><span class="cl">                                                      
+</span></span><span class="line"><span class="cl">  &lt;N&gt;代表数字参数，支持国际单位 (1k, 1M, 1G)
+</span></span><span class="line"><span class="cl">  &lt;T&gt;代表时间参数，支持时间单位 (2s, 2m, 2h)
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="lua-函数">lua 函数</h3>
 <p>wrk支持在启动阶段、运行阶段和结束阶段三个阶段对请求进行定制化处理。</p>
 <h5 id="启动阶段">启动阶段</h5>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">function setup(thread)
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">function setup(thread)
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h5 id="运行阶段">运行阶段</h5>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span><span class="lnt">5
 </span><span class="lnt">6
 </span><span class="lnt">7
-</span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">function init(args)
-
-function delay()
-
-function request()
-
-function response(status, headers, body)
-
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">function init(args)
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">function delay()
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">function request()
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">function response(status, headers, body)
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h5 id="结束阶段">结束阶段</h5>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">function done(summary, latency, requests)
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">function done(summary, latency, requests)
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="使用方式示例">使用方式示例</h3>
 <p>指定线程数、TCP连接数、压测时间并使用lua脚本</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">wrk -t50 -c500 -d30s --latency  -s load.lua http://localhost/filter
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">wrk -t50 -c500 -d30s --latency  -s load.lua http://localhost/filter
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>load.lua</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -321,53 +324,53 @@ function response(status, headers, body)
 </span><span class="lnt">46
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">wrk.method = &#34;POST&#34;
-wrk.headers[&#34;Content-Type&#34;] = &#34;application/json&#34;
-
-
-key_length = 16
-
-local function get_random_key(n) 
-    local t = {
-        &#34;0&#34;,&#34;1&#34;,&#34;2&#34;,&#34;3&#34;,&#34;4&#34;,&#34;5&#34;,&#34;6&#34;,&#34;7&#34;,&#34;8&#34;,&#34;9&#34;,
-        &#34;a&#34;,&#34;b&#34;,&#34;c&#34;,&#34;d&#34;,&#34;e&#34;,&#34;f&#34;,&#34;g&#34;,&#34;h&#34;,&#34;i&#34;,&#34;j&#34;,&#34;k&#34;,&#34;l&#34;,&#34;m&#34;,&#34;n&#34;,&#34;o&#34;,&#34;p&#34;,&#34;q&#34;,&#34;r&#34;,&#34;s&#34;,&#34;t&#34;,&#34;u&#34;,&#34;v&#34;,&#34;w&#34;,&#34;x&#34;,&#34;y&#34;,&#34;z&#34;,
-        &#34;A&#34;,&#34;B&#34;,&#34;C&#34;,&#34;D&#34;,&#34;E&#34;,&#34;F&#34;,&#34;G&#34;,&#34;H&#34;,&#34;I&#34;,&#34;J&#34;,&#34;K&#34;,&#34;L&#34;,&#34;M&#34;,&#34;N&#34;,&#34;O&#34;,&#34;P&#34;,&#34;Q&#34;,&#34;R&#34;,&#34;S&#34;,&#34;T&#34;,&#34;U&#34;,&#34;V&#34;,&#34;W&#34;,&#34;X&#34;,&#34;Y&#34;,&#34;Z&#34;,
-    }    
-    local s = &#34;&#34;
-    for i =1, n do
-        s = s .. t[math.random(#t)]        
-    end;
-    return s
-end;
-
-local function create_keys()
-    local keys = {}
-    for i=1, 100 do
-      keys[i] = get_random_key(key_length)
-    end;
-    return keys
-end;
-
-local function get_body()
-    keys= create_keys()
-    body = {
-        filter=&#34;bloom&#34;,
-        keyspace=&#34;default&#34;,
-        action=2,
-        keys = keys,
-    }
-
-    local cjson = require &#34;cjson&#34;
-    str_body = cjson.encode(body)
-    return str_body
-end;
-
-
-function request()
-    wrk.body = get_body()
-    return wrk.format()
-end;
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">wrk.method = &#34;POST&#34;
+</span></span><span class="line"><span class="cl">wrk.headers[&#34;Content-Type&#34;] = &#34;application/json&#34;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">key_length = 16
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">local function get_random_key(n) 
+</span></span><span class="line"><span class="cl">    local t = {
+</span></span><span class="line"><span class="cl">        &#34;0&#34;,&#34;1&#34;,&#34;2&#34;,&#34;3&#34;,&#34;4&#34;,&#34;5&#34;,&#34;6&#34;,&#34;7&#34;,&#34;8&#34;,&#34;9&#34;,
+</span></span><span class="line"><span class="cl">        &#34;a&#34;,&#34;b&#34;,&#34;c&#34;,&#34;d&#34;,&#34;e&#34;,&#34;f&#34;,&#34;g&#34;,&#34;h&#34;,&#34;i&#34;,&#34;j&#34;,&#34;k&#34;,&#34;l&#34;,&#34;m&#34;,&#34;n&#34;,&#34;o&#34;,&#34;p&#34;,&#34;q&#34;,&#34;r&#34;,&#34;s&#34;,&#34;t&#34;,&#34;u&#34;,&#34;v&#34;,&#34;w&#34;,&#34;x&#34;,&#34;y&#34;,&#34;z&#34;,
+</span></span><span class="line"><span class="cl">        &#34;A&#34;,&#34;B&#34;,&#34;C&#34;,&#34;D&#34;,&#34;E&#34;,&#34;F&#34;,&#34;G&#34;,&#34;H&#34;,&#34;I&#34;,&#34;J&#34;,&#34;K&#34;,&#34;L&#34;,&#34;M&#34;,&#34;N&#34;,&#34;O&#34;,&#34;P&#34;,&#34;Q&#34;,&#34;R&#34;,&#34;S&#34;,&#34;T&#34;,&#34;U&#34;,&#34;V&#34;,&#34;W&#34;,&#34;X&#34;,&#34;Y&#34;,&#34;Z&#34;,
+</span></span><span class="line"><span class="cl">    }    
+</span></span><span class="line"><span class="cl">    local s = &#34;&#34;
+</span></span><span class="line"><span class="cl">    for i =1, n do
+</span></span><span class="line"><span class="cl">        s = s .. t[math.random(#t)]        
+</span></span><span class="line"><span class="cl">    end;
+</span></span><span class="line"><span class="cl">    return s
+</span></span><span class="line"><span class="cl">end;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">local function create_keys()
+</span></span><span class="line"><span class="cl">    local keys = {}
+</span></span><span class="line"><span class="cl">    for i=1, 100 do
+</span></span><span class="line"><span class="cl">      keys[i] = get_random_key(key_length)
+</span></span><span class="line"><span class="cl">    end;
+</span></span><span class="line"><span class="cl">    return keys
+</span></span><span class="line"><span class="cl">end;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">local function get_body()
+</span></span><span class="line"><span class="cl">    keys= create_keys()
+</span></span><span class="line"><span class="cl">    body = {
+</span></span><span class="line"><span class="cl">        filter=&#34;bloom&#34;,
+</span></span><span class="line"><span class="cl">        keyspace=&#34;default&#34;,
+</span></span><span class="line"><span class="cl">        action=2,
+</span></span><span class="line"><span class="cl">        keys = keys,
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    local cjson = require &#34;cjson&#34;
+</span></span><span class="line"><span class="cl">    str_body = cjson.encode(body)
+</span></span><span class="line"><span class="cl">    return str_body
+</span></span><span class="line"><span class="cl">end;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">function request()
+</span></span><span class="line"><span class="cl">    wrk.body = get_body()
+</span></span><span class="line"><span class="cl">    return wrk.format()
+</span></span><span class="line"><span class="cl">end;
+</span></span></code></pre></td></tr></table>
 </div>
 </div>
     </div>
@@ -425,7 +428,7 @@ end;
   <span class="copyright-year">
     &copy; 
     2020 - 
-    2021<span class="heart"><i class="iconfont icon-heart"></i></span><span>白水</span>
+    2022<span class="heart"><i class="iconfont icon-heart"></i></span><span><a href="https://beian.miit.gov.cn/" target="_blank">鲁ICP备2021027677号-1</a></span>
   </span>
 </div>
 
@@ -439,10 +442,17 @@ end;
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/timeago.js@3.0.2/dist/timeago.min.js" integrity="sha256-jwCP0NAdCBloaIWTWHmW4i3snUNMHUNO+jr9rYd2iOI=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/timeago.js@3.0.2/dist/timeago.locales.min.js" integrity="sha256-ZwofwC1Lf/faQCzN7nZtfijVV6hSwxjQMwXL4gn9qU8=" crossorigin="anonymous"></script>
+  <script><!-- NOTE: timeago.js uses the language code format like "zh_CN" (underscore and case sensitive) -->
+    var languageCode = "zh-cn".replace(/-/g, '_').replace(/_(.*)/, function ($0, $1) {return $0.replace($1, $1.toUpperCase());});
+    timeago().render(document.querySelectorAll('.timeago'), languageCode);
+    timeago.cancel();  
+  </script>
 
 
 
-<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+<script type="text/javascript" src="/js/main.min.4ae89da218555efa0e7093a20b92017d2e1202b66fff9fc2edf4cb8d44b44c6e.js"></script>
   <script type="text/javascript">
     window.MathJax = {
       tex: {

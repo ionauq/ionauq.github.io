@@ -6,7 +6,7 @@
     <description>Recent content in Rust on 白水</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <copyright>白水</copyright>
+    <copyright>&lt;a href=&#34;https://beian.miit.gov.cn/&#34; target=&#34;_blank&#34;&gt;鲁ICP备2021027677号-1&lt;/a&gt;</copyright>
     <lastBuildDate>Thu, 28 Jan 2021 19:26:32 +0800</lastBuildDate><atom:link href="http://localhost:1313/categories/rust/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Rust奇奇怪怪的语法</title>
@@ -14,7 +14,7 @@
       <pubDate>Thu, 28 Jan 2021 19:26:32 +0800</pubDate>
       
       <guid>http://localhost:1313/post/rust/grammar/</guid>
-      <description>Rust 语法奇奇怪怪的写法。 ? 操作符 函数调用后带 ? 什么含义 1 File::create(filename)?; 等同于 1 2 3 4 let output = match File::create(filename){ Ok(f) =&amp;gt; { f } Err(e) =&amp;gt; { return Err(e); } }; ?操作符用于简化Result结构的写</description>
+      <description>Rust 语法奇奇怪怪的写法。 ? 操作符 （Error propagation） 函数调用后带 ? 什么含义 1 File::create(filename)?; 等同于 1 2 3 4 let output = match File::create(filename){ Ok(f) =&amp;gt; { f } Err(e) =&amp;gt; { return Err(e); } };</description>
     </item>
     
   </channel>

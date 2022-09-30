@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>DNS on 白水</title>
+    <link>http://localhost:1313/categories/dns/</link>
+    <description>Recent content in DNS on 白水</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <copyright>&lt;a href=&#34;https://beian.miit.gov.cn/&#34; target=&#34;_blank&#34;&gt;鲁ICP备2021027677号-1&lt;/a&gt;</copyright>
+    <lastBuildDate>Tue, 19 Jul 2022 11:10:06 +0800</lastBuildDate><atom:link href="http://localhost:1313/categories/dns/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>你必须知道的DNS那些事</title>
+      <link>http://localhost:1313/post/network/dns/</link>
+      <pubDate>Tue, 19 Jul 2022 11:10:06 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/network/dns/</guid>
+      <description>DNS（Domain Name System） 域名系统 基本概念 域名系统 (DNS) 将人类可读的域名 (例如，www.baidu.com) 转换为机器可读的 IP 地址。 DNS</description>
+    </item>
+    
+  </channel>
+</rss>

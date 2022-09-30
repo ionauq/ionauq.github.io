@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.85.0 with theme even" />
+<meta name="generator" content="Hugo 0.104.2 with theme even" />
 
 
 <link rel="canonical" href="http://localhost:1313/post/projecteuler/problem_1/" />
@@ -49,7 +49,7 @@
 <meta itemprop="name" content="Multiples of 3 and 5">
 <meta itemprop="description" content="Multiples of 3 and 5 If we list all the natural numbers below 10 that are multiples of 3 or 5, we get 3, 5, 6 and 9. The sum of these multiples is 23. Find the sum of all the multiples of 3 or 5 below 1000. 3或5的倍数 在小于10的自然数中，3或5的倍"><meta itemprop="datePublished" content="2020-10-28T17:40:00+08:00" />
 <meta itemprop="dateModified" content="2020-10-28T17:40:00+08:00" />
-<meta itemprop="wordCount" content="399">
+<meta itemprop="wordCount" content="444">
 <meta itemprop="keywords" content="欧拉计划,数学," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Multiples of 3 and 5"/>
 <meta name="twitter:description" content="Multiples of 3 and 5 If we list all the natural numbers below 10 that are multiples of 3 or 5, we get 3, 5, 6 and 9. The sum of these multiples is 23. Find the sum of all the multiples of 3 or 5 below 1000. 3或5的倍数 在小于10的自然数中，3或5的倍"/>
@@ -136,7 +136,7 @@
         <div class="post-category">
             <a href="/categories/%E6%AC%A7%E6%8B%89%E8%AE%A1%E5%88%92/"> 欧拉计划 </a>
             </div>
-          <span class="more-meta"> 约 399 字 </span>
+          <span class="more-meta"> 约 444 字 </span>
           <span class="more-meta"> 预计阅读 1 分钟 </span>
         
       </div>
@@ -169,6 +169,11 @@
 </nav>
   </div>
 </div>
+  <div class="post-outdated">
+    <div class="warn">
+      <p>【注意】最后更新于 <span class="timeago" datetime="2020-10-28T17:40:00" title="October 28, 2020">October 28, 2020</span>，文中内容可能已过时，请谨慎使用。</p>
+    </div>
+  </div>
     <div class="post-content">
       <h1 id="multiples-of-3-and-5">Multiples of 3 and 5</h1>
 <p>If we list all the natural numbers below 10 that are multiples of 3 or 5, we get 3, 5, 6 and 9. The sum of these multiples is 23.
@@ -190,7 +195,7 @@ $$</p>
 <h3 id="c">C</h3>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -205,31 +210,29 @@ $$</p>
 </span><span class="lnt">13
 </span><span class="lnt">14
 </span><span class="lnt">15
-</span><span class="lnt">16
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-C" data-lang="C"><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
-</span><span class="cp"></span>
-<span class="kt">int</span> <span class="nf">arithmetic_progression_sum</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="p">,</span> <span class="kt">int</span> <span class="n">limit</span><span class="p">)</span> <span class="p">{</span>
-	<span class="kt">int</span> <span class="n">len</span> <span class="o">=</span> <span class="p">(</span><span class="n">limit</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="n">i</span><span class="p">;</span>
-	<span class="k">return</span> <span class="n">i</span> <span class="o">*</span> <span class="n">len</span> <span class="o">*</span> <span class="p">(</span><span class="n">len</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">;</span>
-<span class="p">}</span>
-
-<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
-    <span class="kt">int</span> <span class="n">s3</span>  <span class="o">=</span> <span class="n">arithmetic_progression_sum</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1000</span><span class="p">);</span>
-    <span class="kt">int</span> <span class="n">s5</span>  <span class="o">=</span> <span class="n">arithmetic_progression_sum</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">1000</span><span class="p">);</span>
-    <span class="kt">int</span> <span class="n">s15</span> <span class="o">=</span> <span class="n">arithmetic_progression_sum</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">1000</span><span class="p">);</span>
-    <span class="kt">int</span> <span class="n">result</span> <span class="o">=</span> <span class="n">s3</span> <span class="o">+</span> <span class="n">s5</span> <span class="o">-</span> <span class="n">s15</span><span class="p">;</span>
-    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;%d&#34;</span><span class="p">,</span><span class="n">result</span><span class="p">);</span>
-    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-<span class="p">}</span>
-
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-C" data-lang="C"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">arithmetic_progression_sum</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="p">,</span> <span class="kt">int</span> <span class="n">limit</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">int</span> <span class="n">len</span> <span class="o">=</span> <span class="p">(</span><span class="n">limit</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="n">i</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="n">i</span> <span class="o">*</span> <span class="n">len</span> <span class="o">*</span> <span class="p">(</span><span class="n">len</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">s3</span>  <span class="o">=</span> <span class="n">arithmetic_progression_sum</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1000</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">s5</span>  <span class="o">=</span> <span class="n">arithmetic_progression_sum</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">1000</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">s15</span> <span class="o">=</span> <span class="n">arithmetic_progression_sum</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">1000</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">result</span> <span class="o">=</span> <span class="n">s3</span> <span class="o">+</span> <span class="n">s5</span> <span class="o">-</span> <span class="n">s15</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;%d&#34;</span><span class="p">,</span><span class="n">result</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="java">Java</h3>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -245,26 +248,26 @@ $$</p>
 </span><span class="lnt">14
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-Java" data-lang="Java"><span class="kd">class</span> <span class="nc">Main</span> <span class="o">{</span>
-    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
-        <span class="kt">int</span> <span class="n">s3</span> <span class="o">=</span> <span class="n">arithmeticProgressionSum</span><span class="o">(</span><span class="n">3</span><span class="o">,</span> <span class="n">1000</span><span class="o">);</span>
-        <span class="kt">int</span> <span class="n">s5</span> <span class="o">=</span> <span class="n">arithmeticProgressionSum</span><span class="o">(</span><span class="n">5</span><span class="o">,</span> <span class="n">1000</span><span class="o">);</span>
-        <span class="kt">int</span> <span class="n">s15</span> <span class="o">=</span> <span class="n">arithmeticProgressionSum</span><span class="o">(</span><span class="n">15</span><span class="o">,</span> <span class="n">1000</span><span class="o">);</span>
-        <span class="kt">int</span> <span class="n">result</span> <span class="o">=</span> <span class="n">s3</span> <span class="o">+</span> <span class="n">s5</span> <span class="o">-</span> <span class="n">s15</span><span class="o">;</span>
-        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">result</span><span class="o">);</span>
-    <span class="o">}</span>
-
-    <span class="kd">private</span> <span class="kd">static</span> <span class="kt">int</span> <span class="nf">arithmeticProgressionSum</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">,</span> <span class="kt">int</span> <span class="n">limit</span><span class="o">)</span> <span class="o">{</span>
-        <span class="kt">int</span> <span class="n">len</span> <span class="o">=</span> <span class="o">(</span><span class="n">limit</span> <span class="o">-</span> <span class="n">1</span><span class="o">)</span> <span class="o">/</span> <span class="n">i</span><span class="o">;</span>
-        <span class="k">return</span> <span class="n">i</span> <span class="o">*</span> <span class="n">len</span> <span class="o">*</span> <span class="o">(</span><span class="n">len</span> <span class="o">+</span> <span class="n">1</span><span class="o">)</span> <span class="o">/</span> <span class="n">2</span><span class="o">;</span>
-    <span class="o">}</span>
-<span class="o">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-Java" data-lang="Java"><span class="line"><span class="cl"><span class="kd">class</span> <span class="nc">Main</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">s3</span> <span class="o">=</span> <span class="n">arithmeticProgressionSum</span><span class="o">(</span><span class="n">3</span><span class="o">,</span> <span class="n">1000</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">s5</span> <span class="o">=</span> <span class="n">arithmeticProgressionSum</span><span class="o">(</span><span class="n">5</span><span class="o">,</span> <span class="n">1000</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">s15</span> <span class="o">=</span> <span class="n">arithmeticProgressionSum</span><span class="o">(</span><span class="n">15</span><span class="o">,</span> <span class="n">1000</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">result</span> <span class="o">=</span> <span class="n">s3</span> <span class="o">+</span> <span class="n">s5</span> <span class="o">-</span> <span class="n">s15</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">result</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kd">private</span> <span class="kd">static</span> <span class="kt">int</span> <span class="nf">arithmeticProgressionSum</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">,</span> <span class="kt">int</span> <span class="n">limit</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">len</span> <span class="o">=</span> <span class="o">(</span><span class="n">limit</span> <span class="o">-</span> <span class="n">1</span><span class="o">)</span> <span class="o">/</span> <span class="n">i</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">i</span> <span class="o">*</span> <span class="n">len</span> <span class="o">*</span> <span class="o">(</span><span class="n">len</span> <span class="o">+</span> <span class="n">1</span><span class="o">)</span> <span class="o">/</span> <span class="n">2</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="go">Go</h3>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -282,34 +285,32 @@ $$</p>
 </span><span class="lnt">16
 </span><span class="lnt">17
 </span><span class="lnt">18
-</span><span class="lnt">19
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-Golang" data-lang="Golang"><span class="kn">package</span> <span class="nx">main</span>
-
-<span class="kn">import</span> <span class="p">(</span>
-	<span class="s">&#34;fmt&#34;</span>
-<span class="p">)</span>
-
-<span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
-	<span class="nx">s3</span> <span class="o">:=</span> <span class="nf">arithmetic_progression_sum</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
-	<span class="nx">s5</span> <span class="o">:=</span> <span class="nf">arithmetic_progression_sum</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
-	<span class="nx">s15</span> <span class="o">:=</span> <span class="nf">arithmetic_progression_sum</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
-	<span class="nx">result</span> <span class="o">:=</span> <span class="nx">s3</span> <span class="o">+</span> <span class="nx">s5</span> <span class="o">-</span> <span class="nx">s15</span>
-	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">result</span><span class="p">)</span>
-<span class="p">}</span>
-
-<span class="kd">func</span> <span class="nf">arithmetic_progression_sum</span><span class="p">(</span><span class="nx">i</span> <span class="kt">uint32</span><span class="p">,</span> <span class="nx">limit</span> <span class="kt">uint32</span><span class="p">)</span> <span class="kt">uint32</span> <span class="p">{</span>
-	<span class="nx">len</span> <span class="o">:=</span> <span class="p">(</span><span class="nx">limit</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="nx">i</span>
-	<span class="k">return</span> <span class="nx">i</span> <span class="o">*</span> <span class="nx">len</span> <span class="o">*</span> <span class="p">(</span><span class="nx">len</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span>
-<span class="p">}</span>
-
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-Golang" data-lang="Golang"><span class="line"><span class="cl"><span class="kn">package</span> <span class="nx">main</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="p">(</span>
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;fmt&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">s3</span> <span class="o">:=</span> <span class="nf">arithmetic_progression_sum</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">s5</span> <span class="o">:=</span> <span class="nf">arithmetic_progression_sum</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">s15</span> <span class="o">:=</span> <span class="nf">arithmetic_progression_sum</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">result</span> <span class="o">:=</span> <span class="nx">s3</span> <span class="o">+</span> <span class="nx">s5</span> <span class="o">-</span> <span class="nx">s15</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">result</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">arithmetic_progression_sum</span><span class="p">(</span><span class="nx">i</span> <span class="kt">uint32</span><span class="p">,</span> <span class="nx">limit</span> <span class="kt">uint32</span><span class="p">)</span> <span class="kt">uint32</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">len</span> <span class="o">:=</span> <span class="p">(</span><span class="nx">limit</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="nx">i</span>
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="nx">i</span> <span class="o">*</span> <span class="nx">len</span> <span class="o">*</span> <span class="p">(</span><span class="nx">len</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="rust">Rust</h3>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -322,24 +323,22 @@ $$</p>
 </span><span class="lnt">11
 </span><span class="lnt">12
 </span><span class="lnt">13
-</span><span class="lnt">14
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-Rust" data-lang="Rust"><span class="w">
-</span><span class="w"></span><span class="k">fn</span> <span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">s3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">arithmetic_progression_sum</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">1000</span><span class="p">);</span><span class="w">
-</span><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">s5</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">arithmetic_progression_sum</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">1000</span><span class="p">);</span><span class="w">
-</span><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">s15</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">arithmetic_progression_sum</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span><span class="w"> </span><span class="mi">1000</span><span class="p">);</span><span class="w">
-</span><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">s3</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">s5</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">s15</span><span class="p">;</span><span class="w">
-</span><span class="w">    </span><span class="n">println</span><span class="o">!</span><span class="p">(</span><span class="s">&#34;{}&#34;</span><span class="p">,</span><span class="w"> </span><span class="n">result</span><span class="p">);</span><span class="w">
-</span><span class="w"></span><span class="p">}</span><span class="w">
-</span><span class="w">
-</span><span class="w"></span><span class="k">fn</span> <span class="nf">arithmetic_progression_sum</span><span class="p">(</span><span class="n">i</span>: <span class="kt">u32</span><span class="p">,</span><span class="w"> </span><span class="n">limit</span>: <span class="kt">u32</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="kt">u32</span> <span class="p">{</span><span class="w">
-</span><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">len</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">limit</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">i</span><span class="p">;</span><span class="w">
-</span><span class="w">    </span><span class="n">i</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">len</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">(</span><span class="n">len</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">2</span><span class="w">
-</span><span class="w"></span><span class="p">}</span><span class="w">
-</span><span class="w">
-</span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-Rust" data-lang="Rust"><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">fn</span> <span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">s3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">arithmetic_progression_sum</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">1000</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">s5</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">arithmetic_progression_sum</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">1000</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">s15</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">arithmetic_progression_sum</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span><span class="w"> </span><span class="mi">1000</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">s3</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">s5</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">s15</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="fm">println!</span><span class="p">(</span><span class="s">&#34;{}&#34;</span><span class="p">,</span><span class="w"> </span><span class="n">result</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">fn</span> <span class="nf">arithmetic_progression_sum</span><span class="p">(</span><span class="n">i</span>: <span class="kt">u32</span><span class="p">,</span><span class="w"> </span><span class="n">limit</span>: <span class="kt">u32</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="kt">u32</span> <span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">len</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">limit</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">i</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">i</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">len</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">(</span><span class="n">len</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">2</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
 </div>
 </div>
     </div>
@@ -402,7 +401,7 @@ $$</p>
   <span class="copyright-year">
     &copy; 
     2020 - 
-    2021<span class="heart"><i class="iconfont icon-heart"></i></span><span>白水</span>
+    2022<span class="heart"><i class="iconfont icon-heart"></i></span><span><a href="https://beian.miit.gov.cn/" target="_blank">鲁ICP备2021027677号-1</a></span>
   </span>
 </div>
 
@@ -416,10 +415,17 @@ $$</p>
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/timeago.js@3.0.2/dist/timeago.min.js" integrity="sha256-jwCP0NAdCBloaIWTWHmW4i3snUNMHUNO+jr9rYd2iOI=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/timeago.js@3.0.2/dist/timeago.locales.min.js" integrity="sha256-ZwofwC1Lf/faQCzN7nZtfijVV6hSwxjQMwXL4gn9qU8=" crossorigin="anonymous"></script>
+  <script><!-- NOTE: timeago.js uses the language code format like "zh_CN" (underscore and case sensitive) -->
+    var languageCode = "zh-cn".replace(/-/g, '_').replace(/_(.*)/, function ($0, $1) {return $0.replace($1, $1.toUpperCase());});
+    timeago().render(document.querySelectorAll('.timeago'), languageCode);
+    timeago.cancel();  
+  </script>
 
 
 
-<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+<script type="text/javascript" src="/js/main.min.4ae89da218555efa0e7093a20b92017d2e1202b66fff9fc2edf4cb8d44b44c6e.js"></script>
   <script type="text/javascript">
     window.MathJax = {
       tex: {

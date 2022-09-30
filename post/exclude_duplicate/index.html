@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.85.0 with theme even" />
+<meta name="generator" content="Hugo 0.104.2 with theme even" />
 
 
 <link rel="canonical" href="http://localhost:1313/post/exclude_duplicate/" />
@@ -50,7 +50,7 @@
 <meta itemprop="description" content="精准去重 Array、Set、Map、BitSet、Tree等 Array/普通Set/普通Map 数据量小的时候，大家通常会使用Array、Ha"><meta itemprop="datePublished" content="2021-06-08T18:59:58+08:00" />
 <meta itemprop="dateModified" content="2021-06-08T18:59:58+08:00" />
 <meta itemprop="wordCount" content="4927">
-<meta itemprop="keywords" content="拍重,Bloom filter,BitMap," /><meta name="twitter:card" content="summary"/>
+<meta itemprop="keywords" content="排重,Bloom filter,BitMap," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="你必须知道的排重策略"/>
 <meta name="twitter:description" content="精准去重 Array、Set、Map、BitSet、Tree等 Array/普通Set/普通Map 数据量小的时候，大家通常会使用Array、Ha"/>
 
@@ -134,7 +134,7 @@
       <div class="post-meta">
         <span class="post-time"> 2021-06-08 </span>
         <div class="post-category">
-            <a href="/categories/%E6%8B%8D%E9%87%8D/"> 拍重 </a>
+            <a href="/categories/%E6%8E%92%E9%87%8D/"> 排重 </a>
             </div>
           <span class="more-meta"> 约 4927 字 </span>
           <span class="more-meta"> 预计阅读 10 分钟 </span>
@@ -173,6 +173,11 @@
 </nav>
   </div>
 </div>
+  <div class="post-outdated">
+    <div class="warn">
+      <p>【注意】最后更新于 <span class="timeago" datetime="2021-06-08T18:59:58" title="June 8, 2021">June 8, 2021</span>，文中内容可能已过时，请谨慎使用。</p>
+    </div>
+  </div>
     <div class="post-content">
       <h2 id="精准去重">精准去重</h2>
 <p>Array、Set、Map、BitSet、Tree等</p>
@@ -192,19 +197,19 @@
 </blockquote>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java">    <span class="c1">// 存储结构
-</span><span class="c1"></span>    <span class="kd">private</span> <span class="kt">long</span><span class="o">[]</span> <span class="n">words</span><span class="o">;</span>
-    <span class="c1">// 简化后逻辑
-</span><span class="c1"></span>    <span class="kt">int</span> <span class="n">wordIndex</span> <span class="o">=</span> <span class="n">bitIndex</span> <span class="o">&gt;&gt;</span> <span class="n">6</span><span class="o">;</span>
-    <span class="n">words</span><span class="o">[</span><span class="n">wordIndex</span><span class="o">]</span> <span class="o">|=</span> <span class="o">(</span><span class="n">1L</span> <span class="o">&lt;&lt;</span> <span class="n">bitIndex</span><span class="o">);</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl">    <span class="c1">// 存储结构
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kd">private</span> <span class="kt">long</span><span class="o">[]</span> <span class="n">words</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 简化后逻辑
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kt">int</span> <span class="n">wordIndex</span> <span class="o">=</span> <span class="n">bitIndex</span> <span class="o">&gt;&gt;</span> <span class="n">6</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">words</span><span class="o">[</span><span class="n">wordIndex</span><span class="o">]</span> <span class="o">|=</span> <span class="o">(</span><span class="n">1L</span> <span class="o">&lt;&lt;</span> <span class="n">bitIndex</span><span class="o">);</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p><code>BitSet</code> 存储所需的内存大小要根据存储元素的最大值来确认，这就造成了稀疏的BitSet和稠密的BitSet占用相同的空间。</p>
 <p>为了节省空间在压缩优化历史中产生了<code>WAH(Word Aligned Hybrid)</code>、<code>EWAH(Enhanced Word Aligned Hybrid)</code>、<code>CONCISE(Compressed N Composble Integer Set)</code>、<code>VALWAH(Variable-Aligned Length WAH)</code> 等压缩算法。</p>
@@ -241,42 +246,42 @@
 <p>计算Container索引</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java">  <span class="kd">protected</span> <span class="kd">static</span> <span class="kt">char</span> <span class="nf">highbits</span><span class="o">(</span><span class="kt">int</span> <span class="n">x</span><span class="o">)</span> <span class="o">{</span>
-    <span class="k">return</span> <span class="o">(</span><span class="kt">char</span><span class="o">)</span> <span class="o">(</span><span class="n">x</span> <span class="o">&gt;&gt;&gt;</span> <span class="n">16</span><span class="o">);</span>
-  <span class="o">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl">  <span class="kd">protected</span> <span class="kd">static</span> <span class="kt">char</span> <span class="nf">highbits</span><span class="o">(</span><span class="kt">int</span> <span class="n">x</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="o">(</span><span class="kt">char</span><span class="o">)</span> <span class="o">(</span><span class="n">x</span> <span class="o">&gt;&gt;&gt;</span> <span class="n">16</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">  <span class="o">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>计算低位</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java">  <span class="kd">protected</span> <span class="kd">static</span> <span class="kt">char</span> <span class="nf">lowbits</span><span class="o">(</span><span class="kt">int</span> <span class="n">x</span><span class="o">)</span> <span class="o">{</span>
-    <span class="k">return</span> <span class="o">(</span><span class="kt">char</span><span class="o">)</span> <span class="n">x</span><span class="o">;</span>
-  <span class="o">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl">  <span class="kd">protected</span> <span class="kd">static</span> <span class="kt">char</span> <span class="nf">lowbits</span><span class="o">(</span><span class="kt">int</span> <span class="n">x</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="o">(</span><span class="kt">char</span><span class="o">)</span> <span class="n">x</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">  <span class="o">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p><code>RoaringBitmap</code>类主要属性包含<code>RoaringArray highLowContainer = null;</code>。</p>
 <p>RoaringArray主要结构</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java">  <span class="kt">char</span><span class="o">[]</span> <span class="n">keys</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>    <span class="c1">// short数组，用来存储高16位作为索引
-</span><span class="c1"></span>  <span class="n">Container</span><span class="o">[]</span> <span class="n">values</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>    <span class="c1">// Container数组，用来存储低16位数据
-</span><span class="c1"></span>  <span class="kt">int</span> <span class="n">size</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span>    <span class="c1">// 用来记录当前RBM包含的key-value有效数量
-</span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl">  <span class="kt">char</span><span class="o">[]</span> <span class="n">keys</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>    <span class="c1">// short数组，用来存储高16位作为索引
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">Container</span><span class="o">[]</span> <span class="n">values</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>    <span class="c1">// Container数组，用来存储低16位数据
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">int</span> <span class="n">size</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span>    <span class="c1">// 用来记录当前RBM包含的key-value有效数量
+</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>将一个32-bit的无符号Integer按照高16位分桶处理，其中高16位作为索引存储在char数组中，低16位作为数据存储在某个特定的Container内的数组中。</p>
 <p>存储数据时，先根据高16位找到对应的索引key（二分查找），由于keys和values是一一对应的，即找到了对应的Container，若key存在则将低16位放入对应的Container中，若不存在则创建一个和key对应的Container，并将低16位放入Container中。</p>
@@ -298,7 +303,7 @@
 <p>BitmapContainer初始化</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -308,20 +313,20 @@
 </span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java">    <span class="c1">//简化后代码
-</span><span class="c1"></span>
-    <span class="kd">final</span> <span class="kt">long</span><span class="o">[]</span> <span class="n">bitmap</span><span class="o">;</span>  <span class="c1">// 数组最大长度为1024
-</span><span class="c1"></span>    
-    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">k</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span> <span class="n">k</span> <span class="o">&lt;</span> <span class="n">arrayContainer</span><span class="o">.</span><span class="na">cardinality</span><span class="o">;</span> <span class="o">++</span><span class="n">k</span><span class="o">)</span> <span class="o">{</span>
-      <span class="kd">final</span> <span class="kt">char</span> <span class="n">x</span> <span class="o">=</span> <span class="n">arrayContainer</span><span class="o">.</span><span class="na">content</span><span class="o">[</span><span class="n">k</span><span class="o">];</span>
-        <span class="n">bitmap</span><span class="o">[(</span><span class="n">x</span><span class="o">)</span> <span class="o">/</span> <span class="n">64</span><span class="o">]</span> <span class="o">|=</span> <span class="o">(</span><span class="n">1L</span> <span class="o">&lt;&lt;</span> <span class="n">x</span><span class="o">);</span>
-    <span class="o">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl">    <span class="c1">//简化后代码
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">    <span class="kd">final</span> <span class="kt">long</span><span class="o">[]</span> <span class="n">bitmap</span><span class="o">;</span>  <span class="c1">// 数组最大长度为1024
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">k</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span> <span class="n">k</span> <span class="o">&lt;</span> <span class="n">arrayContainer</span><span class="o">.</span><span class="na">cardinality</span><span class="o">;</span> <span class="o">++</span><span class="n">k</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">      <span class="kd">final</span> <span class="kt">char</span> <span class="n">x</span> <span class="o">=</span> <span class="n">arrayContainer</span><span class="o">.</span><span class="na">content</span><span class="o">[</span><span class="n">k</span><span class="o">];</span>
+</span></span><span class="line"><span class="cl">        <span class="n">bitmap</span><span class="o">[(</span><span class="n">x</span><span class="o">)</span> <span class="o">/</span> <span class="n">64</span><span class="o">]</span> <span class="o">|=</span> <span class="o">(</span><span class="n">1L</span> <span class="o">&lt;&lt;</span> <span class="n">x</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>BitmapContainer增加元素</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -334,18 +339,18 @@
 </span><span class="lnt">11
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java">  <span class="kd">public</span> <span class="n">Container</span> <span class="nf">add</span><span class="o">(</span><span class="kd">final</span> <span class="kt">char</span> <span class="n">i</span><span class="o">)</span> <span class="o">{</span>
-    <span class="kd">final</span> <span class="kt">long</span> <span class="n">previous</span> <span class="o">=</span> <span class="n">bitmap</span><span class="o">[</span><span class="n">i</span> <span class="o">&gt;&gt;&gt;</span> <span class="n">6</span><span class="o">];</span>
-    <span class="kt">long</span> <span class="n">newval</span> <span class="o">=</span> <span class="n">previous</span> <span class="o">|</span> <span class="o">(</span><span class="n">1L</span> <span class="o">&lt;&lt;</span> <span class="n">i</span><span class="o">);</span>
-    <span class="n">bitmap</span><span class="o">[</span><span class="n">i</span> <span class="o">&gt;&gt;&gt;</span> <span class="n">6</span><span class="o">]</span> <span class="o">=</span> <span class="n">newval</span><span class="o">;</span>
-    <span class="k">if</span> <span class="o">(</span><span class="n">USE_BRANCHLESS</span><span class="o">)</span> <span class="o">{</span>
-      <span class="n">cardinality</span> <span class="o">+=</span> <span class="o">(</span><span class="kt">int</span><span class="o">)((</span><span class="n">previous</span> <span class="o">^</span> <span class="n">newval</span><span class="o">)</span> <span class="o">&gt;&gt;&gt;</span> <span class="n">i</span><span class="o">);</span>
-    <span class="o">}</span> <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">previous</span> <span class="o">!=</span> <span class="n">newval</span><span class="o">)</span> <span class="o">{</span>
-      <span class="o">++</span><span class="n">cardinality</span><span class="o">;</span>
-    <span class="o">}</span>
-    <span class="k">return</span> <span class="k">this</span><span class="o">;</span>
-  <span class="o">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl">  <span class="kd">public</span> <span class="n">Container</span> <span class="nf">add</span><span class="o">(</span><span class="kd">final</span> <span class="kt">char</span> <span class="n">i</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">final</span> <span class="kt">long</span> <span class="n">previous</span> <span class="o">=</span> <span class="n">bitmap</span><span class="o">[</span><span class="n">i</span> <span class="o">&gt;&gt;&gt;</span> <span class="n">6</span><span class="o">];</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">long</span> <span class="n">newval</span> <span class="o">=</span> <span class="n">previous</span> <span class="o">|</span> <span class="o">(</span><span class="n">1L</span> <span class="o">&lt;&lt;</span> <span class="n">i</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">bitmap</span><span class="o">[</span><span class="n">i</span> <span class="o">&gt;&gt;&gt;</span> <span class="n">6</span><span class="o">]</span> <span class="o">=</span> <span class="n">newval</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="o">(</span><span class="n">USE_BRANCHLESS</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">      <span class="n">cardinality</span> <span class="o">+=</span> <span class="o">(</span><span class="kt">int</span><span class="o">)((</span><span class="n">previous</span> <span class="o">^</span> <span class="n">newval</span><span class="o">)</span> <span class="o">&gt;&gt;&gt;</span> <span class="n">i</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span> <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">previous</span> <span class="o">!=</span> <span class="n">newval</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">      <span class="o">++</span><span class="n">cardinality</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="k">this</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">  <span class="o">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h5 id="runcontainer">RunContainer</h5>
 <p><code>RunContainer</code>适用于存储连续的数据。采用了行程长度压缩算法(Run Length Encoding)。RLE算法：例如 { 1, 10, 20,0, 31,2 } 会被记录为 {  11, 4, 21, 1}。</p>
@@ -397,25 +402,25 @@
 <p>使用示例</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java">    <span class="n">BloomFilter</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">bloomFilter</span> <span class="o">=</span> <span class="n">BloomFilter</span><span class="o">.</span><span class="na">create</span><span class="o">(</span><span class="n">Funnels</span><span class="o">.</span><span class="na">stringFunnel</span><span class="o">(</span><span class="n">Charsets</span><span class="o">.</span><span class="na">UTF_8</span><span class="o">),</span> <span class="n">100000</span><span class="o">,</span> <span class="n">0</span><span class="o">.</span><span class="na">1</span><span class="o">);</span>
-    <span class="n">bloomFilter</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">&#34;a&#34;</span><span class="o">);</span>
-    <span class="n">bloomFilter</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">&#34;b&#34;</span><span class="o">);</span>
-    <span class="kt">boolean</span> <span class="n">result</span> <span class="o">=</span> <span class="n">bloomFilter</span><span class="o">.</span><span class="na">mightContain</span><span class="o">(</span><span class="s">&#34;a&#34;</span><span class="o">);</span>
-    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">result</span><span class="o">);</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl">    <span class="n">BloomFilter</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">bloomFilter</span> <span class="o">=</span> <span class="n">BloomFilter</span><span class="o">.</span><span class="na">create</span><span class="o">(</span><span class="n">Funnels</span><span class="o">.</span><span class="na">stringFunnel</span><span class="o">(</span><span class="n">Charsets</span><span class="o">.</span><span class="na">UTF_8</span><span class="o">),</span> <span class="n">100000</span><span class="o">,</span> <span class="n">0</span><span class="o">.</span><span class="na">1</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">bloomFilter</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">&#34;a&#34;</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">bloomFilter</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">&#34;b&#34;</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">boolean</span> <span class="n">result</span> <span class="o">=</span> <span class="n">bloomFilter</span><span class="o">.</span><span class="na">mightContain</span><span class="o">(</span><span class="s">&#34;a&#34;</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">result</span><span class="o">);</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p><code>guava</code>实现了<code>MURMUR128_MITZ_32</code>和<code>MURMUR128_MITZ_64</code>两种Hash算法。默认使用<code>MURMUR128_MITZ_64</code>。</p>
 <p>写入</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -431,26 +436,26 @@
 </span><span class="lnt">14
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java">    <span class="kd">public</span> <span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="kt">boolean</span> <span class="nf">put</span><span class="o">(</span><span class="n">T</span> <span class="n">object</span><span class="o">,</span> <span class="n">Funnel</span><span class="o">&lt;?</span> <span class="kd">super</span> <span class="n">T</span><span class="o">&gt;</span> <span class="n">funnel</span><span class="o">,</span> <span class="kt">int</span> <span class="n">numHashFunctions</span><span class="o">,</span> <span class="n">LockFreeBitArray</span> <span class="n">bits</span><span class="o">)</span> <span class="o">{</span>
-      <span class="kt">long</span> <span class="n">bitSize</span> <span class="o">=</span> <span class="n">bits</span><span class="o">.</span><span class="na">bitSize</span><span class="o">();</span>
-      <span class="kt">byte</span><span class="o">[]</span> <span class="n">bytes</span> <span class="o">=</span> <span class="n">Hashing</span><span class="o">.</span><span class="na">murmur3_128</span><span class="o">().</span><span class="na">hashObject</span><span class="o">(</span><span class="n">object</span><span class="o">,</span> <span class="n">funnel</span><span class="o">).</span><span class="na">getBytesInternal</span><span class="o">();</span>
-      <span class="kt">long</span> <span class="n">hash1</span> <span class="o">=</span> <span class="n">lowerEight</span><span class="o">(</span><span class="n">bytes</span><span class="o">);</span>
-      <span class="kt">long</span> <span class="n">hash2</span> <span class="o">=</span> <span class="n">upperEight</span><span class="o">(</span><span class="n">bytes</span><span class="o">);</span>
-
-      <span class="kt">boolean</span> <span class="n">bitsChanged</span> <span class="o">=</span> <span class="kc">false</span><span class="o">;</span>
-      <span class="kt">long</span> <span class="n">combinedHash</span> <span class="o">=</span> <span class="n">hash1</span><span class="o">;</span>
-      <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">numHashFunctions</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
-        <span class="n">bitsChanged</span> <span class="o">|=</span> <span class="n">bits</span><span class="o">.</span><span class="na">set</span><span class="o">((</span><span class="n">combinedHash</span> <span class="o">&amp;</span> <span class="n">Long</span><span class="o">.</span><span class="na">MAX_VALUE</span><span class="o">)</span> <span class="o">%</span> <span class="n">bitSize</span><span class="o">);</span>
-        <span class="n">combinedHash</span> <span class="o">+=</span> <span class="n">hash2</span><span class="o">;</span>
-      <span class="o">}</span>
-      <span class="k">return</span> <span class="n">bitsChanged</span><span class="o">;</span>
-    <span class="o">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl">    <span class="kd">public</span> <span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="kt">boolean</span> <span class="nf">put</span><span class="o">(</span><span class="n">T</span> <span class="n">object</span><span class="o">,</span> <span class="n">Funnel</span><span class="o">&lt;?</span> <span class="kd">super</span> <span class="n">T</span><span class="o">&gt;</span> <span class="n">funnel</span><span class="o">,</span> <span class="kt">int</span> <span class="n">numHashFunctions</span><span class="o">,</span> <span class="n">LockFreeBitArray</span> <span class="n">bits</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">      <span class="kt">long</span> <span class="n">bitSize</span> <span class="o">=</span> <span class="n">bits</span><span class="o">.</span><span class="na">bitSize</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">      <span class="kt">byte</span><span class="o">[]</span> <span class="n">bytes</span> <span class="o">=</span> <span class="n">Hashing</span><span class="o">.</span><span class="na">murmur3_128</span><span class="o">().</span><span class="na">hashObject</span><span class="o">(</span><span class="n">object</span><span class="o">,</span> <span class="n">funnel</span><span class="o">).</span><span class="na">getBytesInternal</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">      <span class="kt">long</span> <span class="n">hash1</span> <span class="o">=</span> <span class="n">lowerEight</span><span class="o">(</span><span class="n">bytes</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">      <span class="kt">long</span> <span class="n">hash2</span> <span class="o">=</span> <span class="n">upperEight</span><span class="o">(</span><span class="n">bytes</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">      <span class="kt">boolean</span> <span class="n">bitsChanged</span> <span class="o">=</span> <span class="kc">false</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">      <span class="kt">long</span> <span class="n">combinedHash</span> <span class="o">=</span> <span class="n">hash1</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">      <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">numHashFunctions</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">bitsChanged</span> <span class="o">|=</span> <span class="n">bits</span><span class="o">.</span><span class="na">set</span><span class="o">((</span><span class="n">combinedHash</span> <span class="o">&amp;</span> <span class="n">Long</span><span class="o">.</span><span class="na">MAX_VALUE</span><span class="o">)</span> <span class="o">%</span> <span class="n">bitSize</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">combinedHash</span> <span class="o">+=</span> <span class="n">hash2</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">      <span class="o">}</span>
+</span></span><span class="line"><span class="cl">      <span class="k">return</span> <span class="n">bitsChanged</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>根据期望写入数与假阳性率计算总bit位数</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -468,28 +473,28 @@
 </span><span class="lnt">16
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java">   <span class="cm">/**
-</span><span class="cm">   * Computes m (total bits of Bloom filter) which is expected to achieve, for the specified
-</span><span class="cm">   * expected insertions, the required false positive probability.
-</span><span class="cm">   *
-</span><span class="cm">   * &lt;p&gt;See http://en.wikipedia.org/wiki/Bloom_filter#Probability_of_false_positives for the
-</span><span class="cm">   * formula.
-</span><span class="cm">   *
-</span><span class="cm">   * @param n expected insertions (must be positive)
-</span><span class="cm">   * @param p false positive rate (must be 0 &lt; p &lt; 1)
-</span><span class="cm">   */</span>
-  <span class="kd">static</span> <span class="kt">long</span> <span class="nf">optimalNumOfBits</span><span class="o">(</span><span class="kt">long</span> <span class="n">n</span><span class="o">,</span> <span class="kt">double</span> <span class="n">p</span><span class="o">)</span> <span class="o">{</span>
-    <span class="k">if</span> <span class="o">(</span><span class="n">p</span> <span class="o">==</span> <span class="n">0</span><span class="o">)</span> <span class="o">{</span>
-      <span class="n">p</span> <span class="o">=</span> <span class="n">Double</span><span class="o">.</span><span class="na">MIN_VALUE</span><span class="o">;</span>
-    <span class="o">}</span>
-    <span class="k">return</span> <span class="o">(</span><span class="kt">long</span><span class="o">)</span> <span class="o">(-</span><span class="n">n</span> <span class="o">*</span> <span class="n">Math</span><span class="o">.</span><span class="na">log</span><span class="o">(</span><span class="n">p</span><span class="o">)</span> <span class="o">/</span> <span class="o">(</span><span class="n">Math</span><span class="o">.</span><span class="na">log</span><span class="o">(</span><span class="n">2</span><span class="o">)</span> <span class="o">*</span> <span class="n">Math</span><span class="o">.</span><span class="na">log</span><span class="o">(</span><span class="n">2</span><span class="o">)));</span>
-  <span class="o">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl">   <span class="cm">/**
+</span></span></span><span class="line"><span class="cl"><span class="cm">   * Computes m (total bits of Bloom filter) which is expected to achieve, for the specified
+</span></span></span><span class="line"><span class="cl"><span class="cm">   * expected insertions, the required false positive probability.
+</span></span></span><span class="line"><span class="cl"><span class="cm">   *
+</span></span></span><span class="line"><span class="cl"><span class="cm">   * &lt;p&gt;See http://en.wikipedia.org/wiki/Bloom_filter#Probability_of_false_positives for the
+</span></span></span><span class="line"><span class="cl"><span class="cm">   * formula.
+</span></span></span><span class="line"><span class="cl"><span class="cm">   *
+</span></span></span><span class="line"><span class="cl"><span class="cm">   * @param n expected insertions (must be positive)
+</span></span></span><span class="line"><span class="cl"><span class="cm">   * @param p false positive rate (must be 0 &lt; p &lt; 1)
+</span></span></span><span class="line"><span class="cl"><span class="cm">   */</span>
+</span></span><span class="line"><span class="cl">  <span class="kd">static</span> <span class="kt">long</span> <span class="nf">optimalNumOfBits</span><span class="o">(</span><span class="kt">long</span> <span class="n">n</span><span class="o">,</span> <span class="kt">double</span> <span class="n">p</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="o">(</span><span class="n">p</span> <span class="o">==</span> <span class="n">0</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">      <span class="n">p</span> <span class="o">=</span> <span class="n">Double</span><span class="o">.</span><span class="na">MIN_VALUE</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="o">(</span><span class="kt">long</span><span class="o">)</span> <span class="o">(-</span><span class="n">n</span> <span class="o">*</span> <span class="n">Math</span><span class="o">.</span><span class="na">log</span><span class="o">(</span><span class="n">p</span><span class="o">)</span> <span class="o">/</span> <span class="o">(</span><span class="n">Math</span><span class="o">.</span><span class="na">log</span><span class="o">(</span><span class="n">2</span><span class="o">)</span> <span class="o">*</span> <span class="n">Math</span><span class="o">.</span><span class="na">log</span><span class="o">(</span><span class="n">2</span><span class="o">)));</span>
+</span></span><span class="line"><span class="cl">  <span class="o">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>根据期望插入数量和总位数计算需要hash次数</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -504,20 +509,20 @@
 </span><span class="lnt">13
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java">   <span class="cm">/**
-</span><span class="cm">   * Computes the optimal k (number of hashes per element inserted in Bloom filter), given the
-</span><span class="cm">   * expected insertions and total number of bits in the Bloom filter.
-</span><span class="cm">   *
-</span><span class="cm">   * &lt;p&gt;See http://en.wikipedia.org/wiki/File:Bloom_filter_fp_probability.svg for the formula.
-</span><span class="cm">   *
-</span><span class="cm">   * @param n expected insertions (must be positive)
-</span><span class="cm">   * @param m total number of bits in Bloom filter (must be positive)
-</span><span class="cm">   */</span>
-  <span class="kd">static</span> <span class="kt">int</span> <span class="nf">optimalNumOfHashFunctions</span><span class="o">(</span><span class="kt">long</span> <span class="n">n</span><span class="o">,</span> <span class="kt">long</span> <span class="n">m</span><span class="o">)</span> <span class="o">{</span>
-    <span class="c1">// (m / n) * log(2), but avoid truncation due to division!
-</span><span class="c1"></span>    <span class="k">return</span> <span class="n">Math</span><span class="o">.</span><span class="na">max</span><span class="o">(</span><span class="n">1</span><span class="o">,</span> <span class="o">(</span><span class="kt">int</span><span class="o">)</span> <span class="n">Math</span><span class="o">.</span><span class="na">round</span><span class="o">((</span><span class="kt">double</span><span class="o">)</span> <span class="n">m</span> <span class="o">/</span> <span class="n">n</span> <span class="o">*</span> <span class="n">Math</span><span class="o">.</span><span class="na">log</span><span class="o">(</span><span class="n">2</span><span class="o">)));</span>
-  <span class="o">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl">   <span class="cm">/**
+</span></span></span><span class="line"><span class="cl"><span class="cm">   * Computes the optimal k (number of hashes per element inserted in Bloom filter), given the
+</span></span></span><span class="line"><span class="cl"><span class="cm">   * expected insertions and total number of bits in the Bloom filter.
+</span></span></span><span class="line"><span class="cl"><span class="cm">   *
+</span></span></span><span class="line"><span class="cl"><span class="cm">   * &lt;p&gt;See http://en.wikipedia.org/wiki/File:Bloom_filter_fp_probability.svg for the formula.
+</span></span></span><span class="line"><span class="cl"><span class="cm">   *
+</span></span></span><span class="line"><span class="cl"><span class="cm">   * @param n expected insertions (must be positive)
+</span></span></span><span class="line"><span class="cl"><span class="cm">   * @param m total number of bits in Bloom filter (must be positive)
+</span></span></span><span class="line"><span class="cl"><span class="cm">   */</span>
+</span></span><span class="line"><span class="cl">  <span class="kd">static</span> <span class="kt">int</span> <span class="nf">optimalNumOfHashFunctions</span><span class="o">(</span><span class="kt">long</span> <span class="n">n</span><span class="o">,</span> <span class="kt">long</span> <span class="n">m</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// (m / n) * log(2), but avoid truncation due to division!
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">return</span> <span class="n">Math</span><span class="o">.</span><span class="na">max</span><span class="o">(</span><span class="n">1</span><span class="o">,</span> <span class="o">(</span><span class="kt">int</span><span class="o">)</span> <span class="n">Math</span><span class="o">.</span><span class="na">round</span><span class="o">((</span><span class="kt">double</span><span class="o">)</span> <span class="n">m</span> <span class="o">/</span> <span class="n">n</span> <span class="o">*</span> <span class="n">Math</span><span class="o">.</span><span class="na">log</span><span class="o">(</span><span class="n">2</span><span class="o">)));</span>
+</span></span><span class="line"><span class="cl">  <span class="o">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><blockquote>
 <p>联想一下算法导论散列表那一节，对于开放地址法，算法导论提出了线性探查、二次探查、双重散列等几种探查方法，以双重散列为冲突最小，这里的思路其实就是双重散列！联想一下上面提到的因为hash冲突而导致误判，那么减少冲突其实是自然而然的。</p>
@@ -542,15 +547,15 @@
 <p>因为布谷鸟过滤器中只存储指纹信息，当这个位置上的指纹被挤兑之后，它需要计算出另一个对偶位置，而计算这个对偶位置是需要元素本身的，但是布谷鸟过滤器巧妙的设计了一个独特的 hash函数，使得可以根据 p1 和 元素指纹 直接计算出 p2，而不需要完整的 x 元素。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">    f = fingerprint(x);
-    i1 = hash(x);
-    i2 = i1 ^ hash(f);
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">    f = fingerprint(x);
+</span></span><span class="line"><span class="cl">    i1 = hash(x);
+</span></span><span class="line"><span class="cl">    i2 = i1 ^ hash(f);
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p><img src="/images/exclude_duplicate/cuckoo_hashing.png" alt=""></p>
 <p><a href="http://www.lkozma.net/cuckoo_hashing_visualization/">Cuckoo Hashing Visualization</a></p>
@@ -558,7 +563,7 @@
 <p>Insert</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -577,24 +582,24 @@
 </span><span class="lnt">17
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">    f = fingerprint(x);
-    i1 = hash(x);
-    i2 = i1 ^ hash(f);
-    if bucket[i1] or bucket[i2] has an empty entry then
-    add f to that bucket;
-    return Done;
-    // must relocate existing items;
-    i = randomly pick i1 or i2;
-    for n = 0; n &lt; MaxNumKicks; n++ do
-    randomly select an entry e from bucket[i];
-    swap f and the fingerprint stored in entry e;
-    i = i ^ hash(f);
-    if bucket[i] has an empty entry then
-    add f to bucket[i];
-    return Done;
-    // Hashtable is considered full;
-    return Failure;
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">    f = fingerprint(x);
+</span></span><span class="line"><span class="cl">    i1 = hash(x);
+</span></span><span class="line"><span class="cl">    i2 = i1 ^ hash(f);
+</span></span><span class="line"><span class="cl">    if bucket[i1] or bucket[i2] has an empty entry then
+</span></span><span class="line"><span class="cl">    add f to that bucket;
+</span></span><span class="line"><span class="cl">    return Done;
+</span></span><span class="line"><span class="cl">    // must relocate existing items;
+</span></span><span class="line"><span class="cl">    i = randomly pick i1 or i2;
+</span></span><span class="line"><span class="cl">    for n = 0; n &lt; MaxNumKicks; n++ do
+</span></span><span class="line"><span class="cl">    randomly select an entry e from bucket[i];
+</span></span><span class="line"><span class="cl">    swap f and the fingerprint stored in entry e;
+</span></span><span class="line"><span class="cl">    i = i ^ hash(f);
+</span></span><span class="line"><span class="cl">    if bucket[i] has an empty entry then
+</span></span><span class="line"><span class="cl">    add f to bucket[i];
+</span></span><span class="line"><span class="cl">    return Done;
+</span></span><span class="line"><span class="cl">    // Hashtable is considered full;
+</span></span><span class="line"><span class="cl">    return Failure;
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h4 id="缺点">缺点</h4>
 <ul>
@@ -630,12 +635,16 @@
     
 <footer class="post-footer">
       <div class="post-tags">
-          <a href="/tags/%E6%8B%8D%E9%87%8D/">拍重</a>
+          <a href="/tags/%E6%8E%92%E9%87%8D/">排重</a>
           <a href="/tags/bloom-filter/">Bloom filter</a>
           <a href="/tags/bitmap/">BitMap</a>
           </div>
       <nav class="post-nav">
-        
+        <a class="prev" href="/post/virtualization_container/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">虚拟化与容器化漫谈</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
         <a class="next" href="/post/leetcode/grumpy_bookstore_owner/">
             <span class="next-text nav-default">爱生气的书店老板</span>
             <span class="next-text nav-mobile">下一篇</span>
@@ -682,7 +691,7 @@
   <span class="copyright-year">
     &copy; 
     2020 - 
-    2021<span class="heart"><i class="iconfont icon-heart"></i></span><span>白水</span>
+    2022<span class="heart"><i class="iconfont icon-heart"></i></span><span><a href="https://beian.miit.gov.cn/" target="_blank">鲁ICP备2021027677号-1</a></span>
   </span>
 </div>
 
@@ -696,10 +705,17 @@
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/timeago.js@3.0.2/dist/timeago.min.js" integrity="sha256-jwCP0NAdCBloaIWTWHmW4i3snUNMHUNO+jr9rYd2iOI=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/timeago.js@3.0.2/dist/timeago.locales.min.js" integrity="sha256-ZwofwC1Lf/faQCzN7nZtfijVV6hSwxjQMwXL4gn9qU8=" crossorigin="anonymous"></script>
+  <script><!-- NOTE: timeago.js uses the language code format like "zh_CN" (underscore and case sensitive) -->
+    var languageCode = "zh-cn".replace(/-/g, '_').replace(/_(.*)/, function ($0, $1) {return $0.replace($1, $1.toUpperCase());});
+    timeago().render(document.querySelectorAll('.timeago'), languageCode);
+    timeago.cancel();  
+  </script>
 
 
 
-<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+<script type="text/javascript" src="/js/main.min.4ae89da218555efa0e7093a20b92017d2e1202b66fff9fc2edf4cb8d44b44c6e.js"></script>
   <script type="text/javascript">
     window.MathJax = {
       tex: {

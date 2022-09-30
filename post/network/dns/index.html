@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>你必须知道的DNS那些事 - 白水</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="白水" /><meta name="description" content="DNS（Domain Name System） 域名系统 基本概念 域名系统 (DNS) 将人类可读的域名 (例如，www.baidu.com) 转换为机器可读的 IP 地址。 DNS" /><meta name="keywords" content="Java, Rust" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.104.2 with theme even" />
+
+
+<link rel="canonical" href="http://localhost:1313/post/network/dns/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.5f113595c968d56879a9b09384d5cb910c30a79bf396b26825b626ffd3b8fad9.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="你必须知道的DNS那些事" />
+<meta property="og:description" content="DNS（Domain Name System） 域名系统 基本概念 域名系统 (DNS) 将人类可读的域名 (例如，www.baidu.com) 转换为机器可读的 IP 地址。 DNS" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/post/network/dns/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2022-07-19T11:10:06+08:00" />
+<meta property="article:modified_time" content="2022-07-19T11:10:06+08:00" />
+
+<meta itemprop="name" content="你必须知道的DNS那些事">
+<meta itemprop="description" content="DNS（Domain Name System） 域名系统 基本概念 域名系统 (DNS) 将人类可读的域名 (例如，www.baidu.com) 转换为机器可读的 IP 地址。 DNS"><meta itemprop="datePublished" content="2022-07-19T11:10:06+08:00" />
+<meta itemprop="dateModified" content="2022-07-19T11:10:06+08:00" />
+<meta itemprop="wordCount" content="4171">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="你必须知道的DNS那些事"/>
+<meta name="twitter:description" content="DNS（Domain Name System） 域名系统 基本概念 域名系统 (DNS) 将人类可读的域名 (例如，www.baidu.com) 转换为机器可读的 IP 地址。 DNS"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">白水</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">主页</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">文章</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">标签</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">分类</li>
+      </a><a href="/about">
+        <li class="mobile-menu-item">关于</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">白水</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">主页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">文章</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">标签</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about">关于</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">你必须知道的DNS那些事</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2022-07-19 </span>
+        <div class="post-category">
+            <a href="/categories/dns/"> DNS </a>
+            </div>
+          <span class="more-meta"> 约 4171 字 </span>
+          <span class="more-meta"> 预计阅读 9 分钟 </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#基本概念">基本概念</a>
+      <ul>
+        <li><a href="#域名">域名</a></li>
+        <li><a href="#域名服务器">域名服务器</a>
+          <ul>
+            <li><a href="#域名服务器分类">域名服务器分类</a></li>
+            <li><a href="#域名服务器解析原理">域名服务器解析原理</a></li>
+          </ul>
+        </li>
+        <li><a href="#实现">实现</a>
+          <ul>
+            <li><a href="#dns协议">DNS协议</a></li>
+            <li><a href="#常用命令">常用命令</a></li>
+            <li><a href="#c-语言">C 语言</a></li>
+            <li><a href="#java-语言">Java 语言</a></li>
+            <li><a href="#linux-系统实现">Linux 系统实现</a></li>
+          </ul>
+        </li>
+        <li><a href="#容器化">容器化</a>
+          <ul>
+            <li><a href="#docker">Docker</a></li>
+            <li><a href="#k8s">K8s</a></li>
+          </ul>
+        </li>
+        <li><a href="#其他dns">其他DNS</a>
+          <ul>
+            <li><a href="#dns-over-https-doh">DNS-over-HTTPS (DoH)</a></li>
+            <li><a href="#dns-over-tls-dot">DNS-over-TLS (DoT)</a></li>
+            <li><a href="#dns-over-http3-doh3">DNS-over-HTTP/3 (DoH3)</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#参考资料">参考资料</a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <p><code>DNS</code>（Domain Name System） 域名系统</p>
+<h1 id="基本概念">基本概念</h1>
+<p>域名系统 (DNS) 将人类可读的域名 (例如，www.baidu.com) 转换为机器可读的 IP 地址。</p>
+<p><code>DNS</code> 属于应用层协议。把 <code>域名/主机名字</code> 转换为IP地址。</p>
+<h2 id="域名">域名</h2>
+<p>域名是文本字符串到Ip地址的的映射。</p>
+<p>域名采用层次树状结构方法命名。每一个域名都由标号序列组成，各标号直接用点隔开。例如 <code>news.baidu.com</code></p>
+<p>级别最低的域名写在最左边，而级别最高的顶级域名则写在最右边。</p>
+<p><img src="/images/dns/baidu-domain.png" alt="news.baidu.com"></p>
+<blockquote>
+<p>每一个标号不超过63个字符（中文需要转换成Punycode），不区分大小写。多标号组成的完整域名总共不超过255个字符。</p>
+</blockquote>
+<p><strong>顶级域名 TLD （Top Level Domain)</strong></p>
+<ol>
+<li>通用顶级域名 gTLD</li>
+<li>国家/地区顶级域名 nTLD</li>
+<li>基础结构域名 (infrastructure domain)
+这种顶级域名只有一个，即 arpa， 用于反向域名解析</li>
+</ol>
+<p>用域名树来表示域名系统较清楚。实际上是一个倒过来的树，在最上面的是根，但没有对应的名字。根下面一级的节点，就是最高一级的顶级域名。顶级域名可往下划分子域，即二级域名。再往下划分就是三级域名、四级域名等等。</p>
+<p><img src="/images/dns/domain-tree.png" alt="domain tree"></p>
+<p>域名由ICANN （Internet Corporation for Assigned Names and Numbers）互联网名称与数字地址分配机构管理。但是具体的管理工作由域名注册管理机构管理（顶级域名）。</p>
+<p>域名注册管理机构将域名注册的商业销售委托给注册商。用户通过注册商购买域名后，注册商必须通知域名注册管理机构并支付费用。</p>
+<p>.COM的顶级域域名注册管理机构是VeriSign, Inc.</p>
+<p><img src="/images/dns/registrar-flow.webp" alt="registrar-flow"></p>
+<h2 id="域名服务器">域名服务器</h2>
+<p>域名系统是通过域名服务器实现的。</p>
+<p><img src="/images/dns/dns-server-tree.png" alt="dns server tree"></p>
+<p>互联网上的DNS服务器是按照层级结构管理的， 分区管理。</p>
+<h3 id="域名服务器分类">域名服务器分类</h3>
+<p><strong>根域名服务器 （root name server)</strong></p>
+<p>根域名服务器是最高层次的域名服务器。根域名服务器记录着顶级域名服务器的域名和 IP 地址。</p>
+<p>目前根域名服务器由13组构成，为了方便人们记忆，使用从 a.rootservers.net到m.rootservers.net的域名表示。这13组根域名服务器只使用13个不同的IP地址（IPv4/IPv6）。</p>
+<table>
+<thead>
+<tr>
+<th>Root Servers</th>
+<th>IPv4</th>
+<th>IPv6</th>
+<th>OPERATOR</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>a.root-servers.net</td>
+<td>198.41.0.4</td>
+<td>2001:503:ba3e::2:30</td>
+<td>Verisign, Inc.</td>
+</tr>
+<tr>
+<td>b.root-servers.net</td>
+<td>199.9.14.201</td>
+<td>2001:500:200::b</td>
+<td>University of Southern California, Information Sciences Institute</td>
+</tr>
+<tr>
+<td>c.root-servers.net</td>
+<td>192.33.4.12</td>
+<td>2001:500:2::c</td>
+<td>Cogent Communications</td>
+</tr>
+<tr>
+<td>d.root-servers.net</td>
+<td>199.7.91.13</td>
+<td>2001:500:2d::d</td>
+<td>University of Maryland</td>
+</tr>
+<tr>
+<td>e.root-servers.net</td>
+<td>192.203.230.10</td>
+<td>2001:500:a8::e</td>
+<td>NASA (Ames Research Center)</td>
+</tr>
+<tr>
+<td>f.root-servers.net</td>
+<td>192.5.5.241</td>
+<td>2001:500:2f::f</td>
+<td>nternet Systems Consortium, Inc.</td>
+</tr>
+<tr>
+<td>g.root-servers.net</td>
+<td>192.112.36.4</td>
+<td>2001:500:12::d0d</td>
+<td>US Department of Defense (NIC)</td>
+</tr>
+<tr>
+<td>h.root-servers.net</td>
+<td>198.97.190.53</td>
+<td>2001:500:1::53</td>
+<td>US Army (Research Lab)</td>
+</tr>
+<tr>
+<td>i.root-servers.net</td>
+<td>192.36.148.17</td>
+<td>2001:7fe::53</td>
+<td>Netnod</td>
+</tr>
+<tr>
+<td>j.root-servers.net</td>
+<td>192.58.128.30</td>
+<td>2001:503:c27::2:30</td>
+<td>Verisign, Inc.</td>
+</tr>
+<tr>
+<td>k.root-servers.net</td>
+<td>193.0.14.129</td>
+<td>2001:7fd::1</td>
+<td>RIPE NCC</td>
+</tr>
+<tr>
+<td>l.root-servers.net</td>
+<td>199.7.83.42</td>
+<td>2001:500:9f::42</td>
+<td>ICANN</td>
+</tr>
+<tr>
+<td>m.root-servers.net</td>
+<td>202.12.27.33</td>
+<td>2001:dc3::35</td>
+<td>WIDE Project</td>
+</tr>
+</tbody>
+</table>
+<p><a href="https://www.internic.net/domain/named.root">root name servers</a></p>
+<p>根域名服务器有很多镜像服务器。在中国大陆北京、上海、广州、杭州等城市都有镜像服务器。</p>
+<p><img src="/images/dns/root-servers-area.png" alt="the root server system instances"></p>
+<p><a href="https://root-servers.org/">root-servers.org</a></p>
+<p>根域名服务器采用任播(anycast)技术，当 DNS客户向某个根域名服务器的IP地址发出查询报文时，互联网上的路由器就能找到离这个DNS客户最近的一个根域名服务器。这样做不仅加快了DNS的查询过程，也更加合理地利用了互联网的资源。</p>
+<p><strong>顶级域名服务器</strong></p>
+<p>负责管理在该顶级域名服务器注册的所有二级域名。当收到DNS查询请求时，给出相应的应答。</p>
+<p><a href="https://www.internic.net/domain/root.zone">root zone</a></p>
+<p><strong>权威域名服务器(Authoritative DNS server)</strong></p>
+<p>权威域名服务器是实际持有并负责DNS资源记录的服务器。是位于DNS查找链底部的服务器，根据所查询的资源记录进行IP地址响应。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">whois baidu.com
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="域名服务器解析原理">域名服务器解析原理</h3>
+<h4 id="查询方式">查询方式</h4>
+<p><strong>递归查询(Recursive Query)</strong></p>
+<p>如果主机所询问的本地域名服务器不知道被查询域名的 IP 地址，那么本地域名服务器就以 DNS 客户的身份，向其他根域名服务器继续发出查询请求报文（即替该主机继续查询），而不是让该主机自己进行下一步的查询。递归查询返回的查询结果或者是所要查询的IP地址，或者是报错，表示无法查询到所需的 IP 地址。</p>
+<p><strong>迭代查询(Iterative Query)</strong></p>
+<p>向域名服务器查询时，不是替本地域名服务器进行后续的查询，而是告知了后续的域名查询服务器。本地域名服务器向根域名服务器的查询通常是采用迭代查询。</p>
+<p>我们以在浏览器中访问网址为例。（下面内容来源于cloudflare）</p>
+<p>DNS查询步骤</p>
+<ol>
+<li>用户在 Web 浏览器中输入 “example.com”，查询传输到 Internet 中，并被DNS递归解析器接收(一般由用户的互联网服务提供商 (ISP) 进行管理)。</li>
+<li>接着，解析器查询 DNS 根域名服务器（.）。</li>
+<li>然后，根服务器使用存储其域信息的顶级域（TLD）DNS 服务器（例如 .com）的地址响应该解析器。在搜索 example.com 时，我们的请求指向 .com TLD。</li>
+<li>然后，解析器向 .com TLD 发出请求。</li>
+<li>TLD 服务器随后使用该域的域名服务器 example.com 的 IP 地址进行响应。</li>
+<li>最后，递归解析器将查询发送到域的域名服务器。</li>
+<li>example.com 的 IP 地址而后从域名服务器返回解析器。</li>
+<li>然后 DNS 解析器使用最初请求的域的 IP 地址响应 Web 浏览器。</li>
+</ol>
+<p>DNS 查找的这 8 个步骤返回 example.com 的 IP 地址后，浏览器便能发出对该网页的请求：</p>
+<ol start="9">
+<li>浏览器向该 IP 地址发出 HTTP 请求。</li>
+<li>位于该 IP 的服务器返回将在浏览器中呈现的网页（第 10 步）。</li>
+</ol>
+<p><img src="/images/dns/dns-lookup-diagram.webp" alt="DNS解析和网页访问"></p>
+<h4 id="dns-记录">DNS 记录</h4>
+<p>DNS 记录是位于权威DNS服务器中的指令，提供一个域的相关信息，包括哪些 IP 地址与该域关联，以及如何处理对该域的请求。所有 DNS 记录都有一个 “TTL”，其代表生存时间，指示DNS服务器多久刷新一次该记录。</p>
+<p>常用DNS记录</p>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>介绍</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A</td>
+<td>IPv4 地址</td>
+</tr>
+<tr>
+<td>AAAA</td>
+<td>IPv6 地址</td>
+</tr>
+<tr>
+<td>CNAME</td>
+<td>将域名指向另一个域名地址，与其保持相同解析</td>
+</tr>
+<tr>
+<td>MX</td>
+<td>用于邮件服务器</td>
+</tr>
+<tr>
+<td>NS</td>
+<td>域名服务器</td>
+</tr>
+<tr>
+<td>SRV</td>
+<td>用于标识某台服务器使用了某个服务</td>
+</tr>
+<tr>
+<td>PTR</td>
+<td>用于根据IP地址查询域名</td>
+</tr>
+</tbody>
+</table>
+<p><img src="/images/dns/dns-record-demo.png" alt="DNS Record Demo"></p>
+<h2 id="实现">实现</h2>
+<h3 id="dns协议">DNS协议</h3>
+<p><img src="/images/dns/dns-protocol.png" alt="DNS 协议格式"></p>
+<p>前12字节属于Header头。</p>
+<p><strong>标识字段（ID/Transaction ID)</strong></p>
+<p>标识字段（ID/Transaction ID)  2字节，客户端设置并由服务器返回结果。客户端通过它来确定响应与查询是否匹配。</p>
+<p><strong>标志字段（Flags）</strong></p>
+<p>标志字段（Flags） 2字节，如下字段组成：</p>
+<table>
+<thead>
+<tr>
+<th>字段</th>
+<th>长度(bit)</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>QR</td>
+<td>1</td>
+<td>0表示查询报文，1表示响应报文</td>
+</tr>
+<tr>
+<td>Opcode</td>
+<td>4</td>
+<td>0（标准查询），其他值为 1（反向查询）和2（服务器状态请求)</td>
+</tr>
+<tr>
+<td>AA</td>
+<td>1</td>
+<td>授权(权威)回答</td>
+</tr>
+<tr>
+<td>TC</td>
+<td>1</td>
+<td>可截断的 ( truncated )</td>
+</tr>
+<tr>
+<td>RD</td>
+<td>1</td>
+<td>期望递归 （Recursion Desired）</td>
+</tr>
+<tr>
+<td>RA</td>
+<td>1</td>
+<td>可用递归  （Recursion Available ）</td>
+</tr>
+<tr>
+<td>Z</td>
+<td>3</td>
+<td>Reserved for future use</td>
+</tr>
+<tr>
+<td>Rcode</td>
+<td>4</td>
+<td>The result code of an answer； 0: No error  1: Format error</td>
+</tr>
+</tbody>
+</table>
+<p><strong>问题数(QDCOUNT)</strong></p>
+<p><strong>资源记录数(ANCOUNTT)</strong></p>
+<p><strong>授权资源记录数(NSCOUNT)</strong></p>
+<p><strong>额外资源记录数(ARCOUNT)</strong></p>
+<p><img src="/images/dns/dns-protocol-question.png" alt="Question"></p>
+<p><img src="/images/dns/dns-protocol-answer.png" alt="Answer"></p>
+<p>DNS报文中最后的三个字段，回答字段、授权字段和附加信息字段，均采用一种称为资源记录RR（Resource Record）的相同格式。</p>
+<p><a href="https://yangwang.hk/?p=878">DNS协议详解</a></p>
+<h3 id="常用命令">常用命令</h3>
+<p><code>ping</code>、<code>host</code>、<code>nslookup</code>、<code>dig</code></p>
+<p>flags</p>
+<ol>
+<li>qr 消息响应</li>
+<li>aa 权威</li>
+<li>rd 递归</li>
+<li>ra 远程服务器支持递归</li>
+</ol>
+<p>dig @域名服务器 域名</p>
+<p>dig +[no]recurse 关闭递归查询（递归默认是打开的）</p>
+<p>dig +vc 发送基于tcp的查询 ( +[no]tcp )</p>
+<p>dig -x ip地址 反向查询</p>
+<p>dig +trace 域名</p>
+<p>dig +short 域名</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">dig                      // 显示13个根域服务器
+</span></span><span class="line"><span class="cl">dig @8.8.8.8 baidu.com   // 从指定域名服务器上查询
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">strace -e trace=open -f ping -c1 baidu.com
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="c-语言">C 语言</h3>
+<p>linux glibc库</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="k">struct</span> <span class="n">hostent</span> <span class="o">*</span><span class="nf">gethostbyname</span><span class="p">(</span><span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">hostname</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">getaddrinfo</span><span class="p">(</span><span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="kr">restrict</span> <span class="n">node</span><span class="p">,</span> <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="kr">restrict</span> <span class="n">service</span><span class="p">,</span> 
+</span></span><span class="line"><span class="cl">                <span class="k">const</span> <span class="k">struct</span> <span class="n">addrinfo</span> <span class="o">*</span><span class="kr">restrict</span> <span class="n">hints</span><span class="p">,</span> <span class="k">struct</span> <span class="n">addrinfo</span> <span class="o">**</span><span class="kr">restrict</span> <span class="n">res</span><span class="p">);</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><code>gethostbyname()</code>函数因只支持IPv4地址已不建议使用，已被<code>getaddrinfo()</code>函数取代。</p>
+<p>具体详细信息可参考<a href="https://man7.org/linux/man-pages/man3/getaddrinfo.3.html">getaddrinfo</a></p>
+<h3 id="java-语言">Java 语言</h3>
+<p><strong>InetAddress.getAllByName(&ldquo;hostname&rdquo;)</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl">  <span class="n">InetAddress</span><span class="o">[]</span> <span class="n">inetAddresses</span> <span class="o">=</span> <span class="n">InetAddress</span><span class="o">.</span><span class="na">getAllByName</span><span class="o">(</span><span class="s">&#34;baidu.com&#34;</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">  <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">Arrays</span><span class="o">.</span><span class="na">stream</span><span class="o">(</span><span class="n">inetAddresses</span><span class="o">).</span><span class="na">map</span><span class="o">(</span><span class="n">String</span><span class="o">::</span><span class="n">valueOf</span><span class="o">).</span><span class="na">collect</span><span class="o">(</span><span class="n">Collectors</span><span class="o">.</span><span class="na">joining</span><span class="o">(</span><span class="s">&#34;\r\n&#34;</span><span class="o">)));</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// 
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>其底层代码是通过<code>native InetAddress[] lookupAllHostAddr(String hostname)</code>方法实现。翻看openJDK源码，此方法调用了系统glibc库的<code>getaddrinfo</code>方法 (Inet4AddressImpl.c或者Inet6AddressImpl.c)。</p>
+<p>Java的地址解析默认带缓存功能。在Java 8中是通过使用 <code>Cache</code> 类实例 <code>addressCache</code>（存储解析成功结果）和 <code>negativeCache</code>（存储解析失败结果）对结果进行缓存，每次查询时优先查询缓存。</p>
+<p>缓存时间我们可以通过：</p>
+<p><code>networkaddress.cache.ttl</code>、<code>sun.net.inetaddr.ttl</code>  控制解析成功缓存时间 (两参数效果相同)，在不开启安全管理器的情况下，默认时间为 30秒。</p>
+<p>如果值为 <code>0</code> 时，不使用缓存；值为 <code>-1</code> 时则缓存永久有效。</p>
+<p><code>networkaddress.cache.negative.ttl</code>、 <code>sun.net.inetaddr.negative.ttl</code> 控制解析失败缓存时间 (两参数效果相同)，默认时间为10秒。</p>
+<blockquote>
+<p><code>sun.net.inetaddr.ttl</code> 和  <code>sun.net.inetaddr.negative.ttl</code>  不建议使用</p>
+</blockquote>
+<blockquote>
+<p>如果开启了 SecurityManager，优先从 ${java.home}/jre/lib/security/java.security 中读取参数，<code>networkaddress.cache.ttl</code>值为 -1，永久缓存。</p>
+</blockquote>
+<blockquote>
+<p>可通过 <code>-Djava.security.manager</code> 启用安全管理器，然而java 17 中移除了 Security Manager</p>
+</blockquote>
+<p>Java默认使用系统的配置策略解析， 我们在程序中可以通过JNDI DNS服务指定自定义DNS服务器</p>
+<p><code>sun.net.spi.nameservice.provider.&lt;n&gt;=&lt;default|dns,sun|...&gt;</code></p>
+<p><code>sun.net.spi.nameservice.nameservers=&lt;server1_ipaddr,server2_ipaddr ...&gt;</code></p>
+<p>使用Google DNS</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="o">-</span><span class="n">Dsun</span><span class="o">.</span><span class="na">net</span><span class="o">.</span><span class="na">spi</span><span class="o">.</span><span class="na">nameservice</span><span class="o">.</span><span class="na">provider</span><span class="o">.</span><span class="na">1</span><span class="o">=</span><span class="n">dns</span><span class="o">,</span><span class="n">sun</span> <span class="o">-</span><span class="n">Dsun</span><span class="o">.</span><span class="na">net</span><span class="o">.</span><span class="na">spi</span><span class="o">.</span><span class="na">nameservice</span><span class="o">.</span><span class="na">nameservers</span><span class="o">=</span><span class="n">8</span><span class="o">.</span><span class="na">8</span><span class="o">.</span><span class="na">8</span><span class="o">.</span><span class="na">8</span><span class="o">,</span><span class="n">8</span><span class="o">.</span><span class="na">8</span><span class="o">.</span><span class="na">4</span><span class="o">.</span><span class="na">4</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>JNDI DNS service 在Java 9 中被移除，使用 <code>jdk.net.hosts.file</code>  替代。</p>
+</blockquote>
+<h4 id="java-18">Java 18</h4>
+<p>Java 18 中实现了 <code>Internet-Address Resolution SPI</code>。</p>
+<p>实现 <code>InetAddressResolver</code> 接口 和 <code>InetAddressResolverProvider</code>抽象类并在 resources 文件夹下添加 <code>META-INF/services/java.net.spi.InetAddressResolverProvider</code> 文件，在文件内配置我们实现的
+<code>InetAddressResolverProvider</code> 全限定类。</p>
+<h4 id="其他框架">其他框架</h4>
+<p><code>Okhttp</code></p>
+<p>提供了<code>Dns</code>接口，方便我们实现自定义DNS解析器</p>
+<p><code>Netty</code></p>
+<h3 id="linux-系统实现">Linux 系统实现</h3>
+<p>查看glibc版本</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">ldd --version                // 查看glibc版本
+</span></span><span class="line"><span class="cl">getconf GNU_LIBC_VERSION    // 查看glibc版本
+</span></span><span class="line"><span class="cl">libc.so.6                   // 查看glibc版本
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><code>/etc/nsswitch.conf</code> <em>Name Service Switch configuration file</em></p>
+<p>用来配置不同的来源的查询顺序。</p>
+<p><code>hosts:      files dns myhostname</code></p>
+<p><code>/etc/hosts</code></p>
+<p>在DNS出现之前，用于维护主机名和IP地址之间的映射关系</p>
+<p><code>/etc/resolv.conf</code></p>
+<p>域名解析器配置文件</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>描述</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>nameserver</td>
+<td>用于配置DNS服务器</td>
+<td>8.8.8.8</td>
+</tr>
+<tr>
+<td>search</td>
+<td>用户配置主机名搜索列表</td>
+<td>example.com company.net</td>
+</tr>
+<tr>
+<td>sortlist</td>
+<td>IP/子网掩码对</td>
+<td>130.155.160.0/255.255.240.0 130.155.0.0</td>
+</tr>
+<tr>
+<td>options</td>
+<td>控制参数</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><strong>nameserver</strong></p>
+<p><code>nameserver</code>用于DNS服务器的配置，支持IPv4 和 IPv6。最多支持3个(参考<code>/resolv/bits/types/res_state.h</code> 中 MAXNS宏)。按照配置顺序请求DNS服务器，请求超时则使用下一个，直至尝试完所有DNS服务器，
+然后再根据配置的重试次数进行重试。</p>
+<p><strong>search</strong></p>
+<p>当查询不完全限定域名时会使用到此参数</p>
+<p><strong>sortlist</strong></p>
+<p><strong>options</strong></p>
+<p><code>timeout</code></p>
+<p>解析器请求超时时间，单位为秒，默认为 5，最大值为30。</p>
+<p><code>attempts</code></p>
+<p>重试次数，默认值为2。最大值为3。</p>
+<p><code>rotate</code></p>
+<p>轮训名称服务器，而非一直使用第一个。</p>
+<p><code>single-request</code></p>
+<p>(since glibc 2.10) glibc从2.9版本开始支持并发执行IPv4和IPv6 请求。此选项禁用并发请求，使glibc顺序执行IPv6和IPv4请求。</p>
+<p><code>single-request-reopen</code> (since glibc 2.9)</p>
+<p>对IPv4和IPv6使用相同的套接字会因为某些原因可能会导致第二个请求发生丢包现象。设置此参数如果第二个请求没有被正确处理时，关闭此连接并打开一个新的连接。</p>
+<p><code>ndots</code>: n</p>
+<p>如果域名参数中 &ldquo;.&rdquo; 的数量大于等于设置的数值，那么解析器就会在使用搜索列表之前，先查找这个域名。</p>
+<h2 id="容器化">容器化</h2>
+<h3 id="docker">Docker</h3>
+<p>Docker 启动容器时，会从宿主机上复制 <code>/etc/resolv.conf</code>文件，并删掉其中无法连接到的DNS服务器。</p>
+<p><code>/etc/hosts</code> 只记录容器自身的地址和名称
+<code>/etc/hostname</code> 容器的主机名</p>
+<p>启动一个容器，在容器中使用 mount 命令可以看到这三个文件挂载信息</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1"># mount</span>
+</span></span><span class="line"><span class="cl">/dev/sda on /etc/resolv.conf <span class="nb">type</span> ext4
+</span></span><span class="line"><span class="cl">/dev/sda on /etc/hostname <span class="nb">type</span> ext4
+</span></span><span class="line"><span class="cl">/dev/sda on /etc/hosts <span class="nb">type</span> ext4
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">--dns<span class="o">=</span>IP_ADDRESS 指定DNS服务器
+</span></span><span class="line"><span class="cl">--dns-option list 指定DNS相关的选项
+</span></span><span class="line"><span class="cl">--dns-search<span class="o">=</span>DOMAIN 指定DNS搜索域
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="k8s">K8s</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">kubectl get service -n kube-system
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Pod 的 DNS 策略</p>
+<ul>
+<li>Default</li>
+<li>ClusterFirst</li>
+<li>ClusterFirstWithHostNet</li>
+<li>None</li>
+</ul>
+<h2 id="其他dns">其他DNS</h2>
+<h3 id="dns-over-https-doh">DNS-over-HTTPS (DoH)</h3>
+<h3 id="dns-over-tls-dot">DNS-over-TLS (DoT)</h3>
+<h3 id="dns-over-http3-doh3">DNS-over-HTTP/3 (DoH3)</h3>
+<h1 id="参考资料">参考资料</h1>
+<p><a href="https://www.cloudflare.com/zh-cn/learning/dns/what-is-dns/">cloudflare DNS</a></p>
+<p><a href="https://www.verisign.com/zh_CN/website-presence/online/how-dns-works/index.xhtml">VeriSign 域名系统 (DNS) 工作原理</a></p>
+<p><a href="https://docs.oracle.com/javase/8/docs/technotes/guides/net/properties.html">Java 8 Networking Properties</a></p>
+<p><a href="https://openjdk.org/jeps/418">Java 18 JEP 418: Internet-Address Resolution SPI</a></p>
+<p><a href="https://man7.org/linux/man-pages/man5/resolv.conf.5.html">man resolv.conf</a></p>
+<p><a href="https://datatracker.ietf.org/doc/html/draft-ietf-dnsind-edns0-01">raft-ietf-dnsind-edns0-01</a></p>
+<p><a href="https://www.alibabacloud.com/help/zh/container-service-for-kubernetes/latest/troubleshooting-dns-troubleshooting">DNS解析异常问题排查</a></p>
+<p><a href="https://help.aliyun.com/document_detail/201873.html">阿里云 服务发现DNS</a></p>
+
+    </div>
+
+    
+<footer class="post-footer">
+      
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/virtualization_container/">
+            <span class="next-text nav-default">虚拟化与容器化漫谈</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+    <script src="https://utteranc.es/client.js"
+            repo="qtume/qtume.github.io"
+            issue-term="pathname"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://github.com/utterance">comments powered by utterances.</a></noscript>
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="http://localhost:1313" class="iconfont icon-github" title="github"></a>
+  <a href="http://localhost:1313/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    天行健，君子以自强不息
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    地势坤，君子以厚德载物 
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2020 - 
+    2022<span class="heart"><i class="iconfont icon-heart"></i></span><span><a href="https://beian.miit.gov.cn/" target="_blank">鲁ICP备2021027677号-1</a></span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/timeago.js@3.0.2/dist/timeago.min.js" integrity="sha256-jwCP0NAdCBloaIWTWHmW4i3snUNMHUNO+jr9rYd2iOI=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/timeago.js@3.0.2/dist/timeago.locales.min.js" integrity="sha256-ZwofwC1Lf/faQCzN7nZtfijVV6hSwxjQMwXL4gn9qU8=" crossorigin="anonymous"></script>
+  <script><!-- NOTE: timeago.js uses the language code format like "zh_CN" (underscore and case sensitive) -->
+    var languageCode = "zh-cn".replace(/-/g, '_').replace(/_(.*)/, function ($0, $1) {return $0.replace($1, $1.toUpperCase());});
+    timeago().render(document.querySelectorAll('.timeago'), languageCode);
+    timeago.cancel();  
+  </script>
+
+
+
+<script type="text/javascript" src="/js/main.min.4ae89da218555efa0e7093a20b92017d2e1202b66fff9fc2edf4cb8d44b44c6e.js"></script>
+  <script type="text/javascript">
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        }
+    };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@3.0.5/es5/tex-mml-chtml.js" integrity="sha256-HGLuEfFcsUJGhvB8cQ8nr0gai9EucOOaIxFw7qxmd+w=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>
